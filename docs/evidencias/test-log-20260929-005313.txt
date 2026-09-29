@@ -1,0 +1,60 @@
+== BiblioLivre - execução do test harness ==
+Data: Tue Sep 29 00:53:13 UTC 2026
+Python: Python 3.12.3
+SO: Linux vm 6.18.44-fc-v37 #1 SMP PREEMPT_DYNAMIC @0 x86_64 x86_64 x86_64 GNU/Linux
+Commit: n/a
+
+test_cadastra_livro (tests.test_cadastro.TestCadastro.test_cadastra_livro) ... ok
+test_cadastra_membro_normaliza_email (tests.test_cadastro.TestCadastro.test_cadastra_membro_normaliza_email) ... ok
+test_email_duplicado_case_insensitive (tests.test_cadastro.TestCadastro.test_email_duplicado_case_insensitive) ... ok
+test_email_invalido (tests.test_cadastro.TestCadastro.test_email_invalido) ... ok
+test_exemplares_invalidos (tests.test_cadastro.TestCadastro.test_exemplares_invalidos) ... ok
+test_livro_duplicado (tests.test_cadastro.TestCadastro.test_livro_duplicado) ... ok
+test_nome_vazio (tests.test_cadastro.TestCadastro.test_nome_vazio) ... ok
+test_sql_injection_tratado_como_texto (tests.test_cadastro.TestCadastro.test_sql_injection_tratado_como_texto) ... ok
+test_titulo_autor_vazios (tests.test_cadastro.TestCadastro.test_titulo_autor_vazios) ... ok
+test_aceita_com_e_sem_hifens (tests.test_cadastro.TestIsbn.test_aceita_com_e_sem_hifens) ... ok
+test_rejeita_digito_verificador_errado (tests.test_cadastro.TestIsbn.test_rejeita_digito_verificador_errado) ... ok
+test_rejeita_tamanho_ou_letras (tests.test_cadastro.TestIsbn.test_rejeita_tamanho_ou_letras) ... ok
+test_anonimizar_pela_cli (tests.test_cli.TestCli.test_anonimizar_pela_cli) ... ok
+test_atrasados_vazio (tests.test_cli.TestCli.test_atrasados_vazio) ... ok
+test_banco_corrompido_nao_expoe_stack_trace (tests.test_cli.TestCli.test_banco_corrompido_nao_expoe_stack_trace) ... ok
+test_erro_retorna_codigo_1_e_mensagem (tests.test_cli.TestCli.test_erro_retorna_codigo_1_e_mensagem) ... ok
+test_fluxo_ponta_a_ponta_persistente (tests.test_cli.TestCli.test_fluxo_ponta_a_ponta_persistente) ... ok
+test_atrasados_multa_e_pagamento (tests.test_cli.TestCliComRelogio.test_atrasados_multa_e_pagamento) ... ok
+test_renovar (tests.test_cli.TestCliComRelogio.test_renovar) ... ok
+test_atrasados (tests.test_emprestimos.TestDevolucaoEMulta.test_atrasados) ... ok
+test_calculo_multa_limites (tests.test_emprestimos.TestDevolucaoEMulta.test_calculo_multa_limites) ... ok
+test_devolucao_duplicada (tests.test_emprestimos.TestDevolucaoEMulta.test_devolucao_duplicada) ... ok
+test_devolucao_inexistente (tests.test_emprestimos.TestDevolucaoEMulta.test_devolucao_inexistente) ... ok
+test_devolucao_libera_exemplar (tests.test_emprestimos.TestDevolucaoEMulta.test_devolucao_libera_exemplar) ... ok
+test_devolucao_no_dia_do_prazo_sem_multa (tests.test_emprestimos.TestDevolucaoEMulta.test_devolucao_no_dia_do_prazo_sem_multa) ... ok
+test_relogio_anterior_ao_emprestimo (tests.test_emprestimos.TestDevolucaoEMulta.test_relogio_anterior_ao_emprestimo)
+Proteção contra relógio do computador desajustado. ... ok
+test_bloqueio_por_atraso_ativo (tests.test_emprestimos.TestEmprestar.test_bloqueio_por_atraso_ativo) ... ok
+test_bloqueio_por_multa_e_desbloqueio_apos_pagar (tests.test_emprestimos.TestEmprestar.test_bloqueio_por_multa_e_desbloqueio_apos_pagar) ... ok
+test_fluxo_normal (tests.test_emprestimos.TestEmprestar.test_fluxo_normal) ... ok
+test_limite_de_tres (tests.test_emprestimos.TestEmprestar.test_limite_de_tres) ... ok
+test_membro_ou_livro_inexistente (tests.test_emprestimos.TestEmprestar.test_membro_ou_livro_inexistente) ... ok
+test_mesmo_livro_duas_vezes (tests.test_emprestimos.TestEmprestar.test_mesmo_livro_duas_vezes) ... ok
+test_sem_exemplar_disponivel (tests.test_emprestimos.TestEmprestar.test_sem_exemplar_disponivel) ... ok
+test_nao_renova_atrasado (tests.test_emprestimos.TestRenovacao.test_nao_renova_atrasado) ... ok
+test_nao_renova_devolvido (tests.test_emprestimos.TestRenovacao.test_nao_renova_devolvido) ... ok
+test_renova_uma_vez (tests.test_emprestimos.TestRenovacao.test_renova_uma_vez) ... ok
+test_renovar_no_ultimo_dia_permitido (tests.test_emprestimos.TestRenovacao.test_renovar_no_ultimo_dia_permitido) ... ok
+test_bloqueia_com_emprestimo_ativo (tests.test_lgpd_concorrencia.TestAnonimizacaoLGPD.test_bloqueia_com_emprestimo_ativo) ... ok
+test_bloqueia_com_multa_pendente (tests.test_lgpd_concorrencia.TestAnonimizacaoLGPD.test_bloqueia_com_multa_pendente) ... ok
+test_email_original_fica_livre_para_novo_cadastro (tests.test_lgpd_concorrencia.TestAnonimizacaoLGPD.test_email_original_fica_livre_para_novo_cadastro) ... ok
+test_membro_inexistente (tests.test_lgpd_concorrencia.TestAnonimizacaoLGPD.test_membro_inexistente) ... ok
+test_remove_nome_e_email_preservando_historico (tests.test_lgpd_concorrencia.TestAnonimizacaoLGPD.test_remove_nome_e_email_preservando_historico) ... ok
+test_rollback_quando_regra_falha_no_meio (tests.test_lgpd_concorrencia.TestTransacoes.test_rollback_quando_regra_falha_no_meio) ... ok
+test_ultimo_exemplar_disputado_por_varios_processos (tests.test_lgpd_concorrencia.TestTransacoes.test_ultimo_exemplar_disputado_por_varios_processos)
+ERR-06: 8 conexões independentes disputam 1 exemplar -> só 1 vence. ... ok
+test_multa_monotona_e_limitada (tests.test_propriedades.TestInvariantes.test_multa_monotona_e_limitada)
+RN-06/07: mais dias de atraso nunca geram multa menor, e nunca passa do teto. ... ok
+test_simulacao_aleatoria (tests.test_propriedades.TestInvariantes.test_simulacao_aleatoria) ... ok
+
+----------------------------------------------------------------------
+Ran 46 tests in 0.347s
+
+OK

@@ -1,0 +1,17 @@
+[project]
+name = "bibliolivre"
+version = "1.0.0"
+description = "Sistema de empréstimos para bibliotecas comunitárias"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+
+[project.scripts]
+bibliolivre = "bibliolivre.cli:main"
+
+[tool.ruff]
+line-length = 110
+target-version = "py310"
+
+[tool.coverage.run]
+source = ["bibliolivre"]
+omit = ["bibliolivre/__main__.py"]

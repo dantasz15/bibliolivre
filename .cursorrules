@@ -1,0 +1,17 @@
+Você está trabalhando no BiblioLivre, sistema de empréstimos de biblioteca em Python puro (>=3.10) com SQLite.
+
+SEMPRE:
+- Consultar docs/SPEC.md antes de gerar código; ela é a fonte da verdade (Spec-Driven Development).
+- Referenciar IDs da SPEC (RF-xx, RN-xx) nos comentários e testes.
+- Escrever/atualizar o teste antes da implementação.
+- Usar SQL parametrizado (?), valores monetários em centavos (int) e self.hoje() para datas.
+- Manter regras de negócio apenas em bibliolivre/services.py.
+- Envolver toda escrita em repo.transacao() (BEGIN IMMEDIATE).
+
+NUNCA:
+- Inventar regras de negócio não previstas na SPEC. Em caso de ambiguidade, pergunte.
+- Adicionar dependências externas.
+- Usar float para dinheiro ou date.today() dentro dos serviços.
+- Incluir dados pessoais reais, segredos ou arquivos .db.
+
+Testes: python -m unittest discover -s tests -t . -v
