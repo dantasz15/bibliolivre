@@ -28,7 +28,17 @@ O lint Ruff (`ruff check bibliolivre tests`) passou e `make demo` executou o flu
 
 O workflow [`.github/workflows/ci.yml`](../.github/workflows/ci.yml) está configurado para executar lint, testes/cobertura em Python 3.10, 3.11 e 3.12, além do harness e build Docker. [`.github/workflows/codeql.yml`](../.github/workflows/codeql.yml) configura análise CodeQL.
 
-**Estado desta documentação:** os workflows acabaram de ser adicionados nesta branch. Até a primeira execução no GitHub Actions, não há status remoto verde a citar. O link do PR e os resultados de CI/CodeQL devem ser registrados aqui após a execução; o resultado local não é apresentado como CI.
+## Execução oficial do PR
+
+No commit `0eb22aa` (`0eb22aa289c33546ccd4f6aa2abd2b9892dd75cd`), o evento `pull_request` concluiu com sucesso:
+
+- [PR #9 — `release/1.0.0` → `main`](https://github.com/dantasz15/bibliolivre/pull/9).
+- [CI do PR — execução 40212336837](https://github.com/dantasz15/bibliolivre/actions/runs/40212336837): lint, matriz Python 3.10–3.12 e Docker passaram.
+- [CodeQL — execução 40212336839](https://github.com/dantasz15/bibliolivre/actions/runs/40212336839): análise concluída com sucesso.
+- A página do PR reportou 12 checks bem-sucedidos, 0 falhas e 0 pendências. Em cada versão Python, 47 testes passaram e 348/348 instruções tiveram cobertura (100%). O harness Docker também executou 47 testes e a imagem runtime foi construída.
+- Artefatos `coverage-python-3.10`, `coverage-python-3.11` e `coverage-python-3.12` foram enviados ao Actions e ficam disponíveis até 24/11/2026. Para baixar: `gh run download 40212336837 --repo dantasz15/bibliolivre`.
+
+A primeira execução da candidata identificou em Python 3.10 a ausência do suporte TOML do Coverage. A dependência foi corrigida para `coverage[toml]`; os resultados acima pertencem ao commit corrigido. O PR continua draft e a integração/release ainda depende de aprovação humana independente.
 
 ## Comandos reproduzíveis
 

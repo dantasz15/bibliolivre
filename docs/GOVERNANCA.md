@@ -29,4 +29,8 @@ A branch `release/1.0.0` desta entrega deve passar por esse fluxo. A exigência 
 
 Os arquivos de configuração versionados (`.github/workflows/`, `.github/CODEOWNERS` e o template de PR) descrevem os controles pretendidos. Eles não provam que o GitHub os executou nem que alguém aprovou uma alteração. Resultados CI, CodeQL, revisores, merge e release devem ser citados somente por seus links e estados observados na plataforma.
 
-Até esta documentação ser atualizada com o PR da release, não há registro público de Project Board nem de revisão por pares realizada nas entregas anteriores. O projeto está documentado como trabalho individual de Gabriel Henrique Rodrigues Dantas.
+O PR da release não altera a ausência de registro histórico de Project Board ou de revisão por pares nas entregas anteriores. O projeto está documentado como trabalho individual de Gabriel Henrique Rodrigues Dantas; uma aprovação independente para o PR atual ainda está pendente.
+
+## Estado da candidata à release — 25 de outubro de 2026
+
+O [PR #9](https://github.com/dantasz15/bibliolivre/pull/9), branch `release/1.0.0` → `main`, está aberto em draft no commit `0eb22aa`. CI (Python 3.10–3.12, lint e Docker) e CodeQL passaram; ver os [checks da execução do PR](https://github.com/dantasz15/bibliolivre/actions/runs/40212336837) e a [execução CodeQL](https://github.com/dantasz15/bibliolivre/actions/runs/40212336839). A decisão remota continua `REVIEW_REQUIRED`, não há revisor atribuído e não houve merge nem tag `v1.0.0`.

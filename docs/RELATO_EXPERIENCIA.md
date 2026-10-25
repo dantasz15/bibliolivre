@@ -16,7 +16,7 @@ Para esta preparação da release, as alterações estão isoladas em uma branch
 - `coverage.py` mediu 100% de cobertura de linhas nos módulos incluídos, totalizando 348 instruções executáveis nessa execução.
 - Ruff não encontrou problemas no código e nos testes.
 - O cenário `make demo` concluiu cadastro de livro e membro, empréstimo, renovação, devolução e anonimização.
-- A imagem e os testes Docker ainda dependem da execução do workflow no GitHub, pois o ambiente de desenvolvimento utilizado não dispunha de Docker.
+- O ambiente local não dispunha de Docker; no GitHub Actions, o harness Docker executou 47 testes e o build da imagem runtime passou no commit `0eb22aa`.
 
 ## 4. Desafios e correções
 
@@ -29,9 +29,9 @@ Também foram corrigidas instruções de build Docker para usar volume nomeado e
 - Manter a SPEC explícita ajuda a rastrear as regras, mas o As-Built precisa ser conferido contra o código e a API efetivos.
 - Testes de regressão transformam um achado de revisão em uma proteção repetível.
 - Cobertura de 100% de linhas não é sinônimo de ausência de bugs: o caso de colisão só apareceu na auditoria de combinações de dados.
-- A CI e a execução Docker são importantes para validar mais de uma versão de Python e o ambiente empacotado; essa evidência ainda precisa vir do GitHub Actions.
+- A CI validou Python 3.10–3.12, Docker e CodeQL no PR #9; os resultados são vinculados ao commit candidato `0eb22aa`.
 - Revisão humana independente não pode ser substituída por IA ou pela aprovação dos testes.
 
 ## 6. Próximos passos para encerrar
 
-Aprovar e incorporar o PR na `main`, confirmar os status de CI e CodeQL, publicar a tag/release `v1.0.0`, alterar a branch padrão para `main` se aprovado pelo mantenedor, gravar a demonstração de 3–5 minutos e anexar o link real ao PDF acadêmico. Não foram estimadas horas economizadas nem experiências de equipe porque não há registros que sustentem esses dados.
+Aguardar aprovação independente e incorporar o PR na `main`; só então publicar a tag/release `v1.0.0`, alterar a branch padrão para `main` se aprovado pelo mantenedor, gravar a demonstração de 3–5 minutos e anexar o link real ao PDF acadêmico. Não foram estimadas horas economizadas nem experiências de equipe porque não há registros que sustentem esses dados.
