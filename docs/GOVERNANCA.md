@@ -1,61 +1,32 @@
 # Governança do Repositório
 
-## Modelo de branches (Git Flow simplificado)
-- `main` — versões entregues (tags `v1.0-entrega1`, `v2.0-entrega2`). **Protegida**: sem push direto; só recebe merge de `develop`.
-- `develop` — integração contínua do trabalho da sprint. **Protegida**: só recebe PRs revisados.
-- `feature/<issue>-<descricao>` — saem de `develop` e voltam para `develop` via PR (ex.: `feature/12-renovacao`).
-- `fix/<issue>-<descricao>` — correções (ex.: `fix/18-multa-off-by-one`).
-- `docs/<descricao>` — documentação.
+## Estado verificado no GitHub
 
-## Regras de proteção da `main` e da `develop` (Settings → Branches / Rulesets)
-- [x] Require a pull request before merging
-- [x] Require approvals: **1** (revisor diferente do autor)
-- [x] Require status checks to pass: `lint`, `test (3.10)`, `test (3.11)`, `test (3.12)`, `docker`, `analyze` (CodeQL)
-- [x] Require conversation resolution before merging
-- [x] Do not allow bypassing the above settings
+Consulta realizada em 24 de outubro de 2026, antes da abertura do PR de preparação da release:
 
-## Critérios de aceitação para merge (Definition of Done)
-1. CI verde: lint, testes nas três versões de Python com cobertura ≥ 95%, testes no Docker e CodeQL sem alertas.
-2. Ao menos 1 aprovação de outro membro.
-3. Toda regra nova/alterada tem teste e ID da SPEC citado.
-4. Se o comportamento mudou, `docs/SPEC.md` foi atualizado **no mesmo PR**.
-5. Código gerado por IA foi lido e entendido pelo autor e marcado no template do PR.
-6. Sem segredos, dados pessoais reais ou arquivos `.db` no commit.
+- Repositório: [`dantasz15/bibliolivre`](https://github.com/dantasz15/bibliolivre).
+- A branch padrão configurada então era `devevop` (grafia existente no repositório); `main` também existia e apontava para a linha de release.
+- `main` estava protegida para atores sujeitos à regra: PR e uma aprovação configurados; push forçado e exclusão estavam desabilitados. A configuração não aplicava a regra a administradores (`enforce_admins=false`), portanto um administrador pode ter possibilidade técnica de bypass.
+- A proteção consultada não listava status checks obrigatórios. Portanto, CI configurado não deve ser descrito como bloqueio automático de merge enquanto essa regra remota não for atualizada.
+- Não havia PR aberto antes desta preparação; o histórico público também não comprovava aprovações de code review, Project Board ou divisão de tarefas entre integrantes.
+- O histórico inicial tinha uma branch de desenvolvimento chamada `devevop`; não há branch `develop` comprovada.
 
-## Convenção de commits (Conventional Commits)
-`feat:`, `fix:`, `test:`, `docs:`, `refactor:`, `ci:` — ex.: `fix(multa): não cobrar no dia do vencimento (#18)`.
-Use `Closes #N` na descrição do PR para fechar a issue automaticamente.
+Este retrato descreve a configuração consultada, não uma afirmação de que todos os merges históricos cumpriram um fluxo de revisão. As alterações da Entrega 3 devem ser avaliadas no PR e sua situação final atualizada com dados reais.
 
-## Planejamento em sprints
-| Sprint | Objetivo | Issues sugeridas |
-|---|---|---|
-| 1 | Base do projeto | Estrutura do repo e CI · Modelos e erros · Repositório SQLite · Cadastro de livros/membros |
-| 2 | Núcleo do domínio | Empréstimo (RN-01..04, 08) · Devolução e multa · Relógio injetável |
-| 3 | Refinamento | Renovação · Listagem de atrasados · Pagamento de multas · CLI completa |
-| 4 | Qualidade e entrega | Correções ERR-01..05 · Re-especificações RE-01..04 · README, ADRs, relatório de IA |
+## Fluxo de contribuição esperado
 
-Use um **GitHub Project (Board)** com colunas *Backlog → Em andamento → Em revisão → Concluído* e um **Milestone** por sprint.
+1. Criar uma branch de trabalho a partir de `main` atualizada.
+2. Relacionar mudança funcional com SPEC e teste; mudanças de comportamento exigem teste de regressão.
+3. Executar `make lint`, `make coverage` e o harness Docker quando houver engine disponível.
+4. Abrir Pull Request para `main` com resumo e resultados reproduzíveis.
+5. Aguardar CI verde e uma aprovação independente, conforme a proteção existente. O autor não pode aprovar o próprio PR.
+6. Corrigir comentários e só então integrar usando o método permitido pelo GitHub.
+7. Criar tag/release após a integração e verificar se não restaram PRs de release abertos.
 
-## Comandos úteis (GitHub CLI)
-```bash
-# issues, rótulos e milestones de todas as sprints
-./scripts/criar_issues.sh usuario/repositorio
+A branch `release/1.0.0` desta entrega deve passar por esse fluxo. A exigência de revisão humana não será contornada por push direto, alteração para remover a regra ou aprovação simulada por IA.
 
-# rótulos (já incluídos no script)
-gh label create spec --color 5319e7 --description "Mudança na especificação"
-gh label create ia-assistido --color fbca04 --description "PR com código gerado/assistido por IA"
+## Evidências e limitações
 
-# fluxo de uma feature
-git switch develop && git pull
-git switch -c feature/12-renovacao
-# ... código + testes ...
-git commit -m "feat(renovacao): permite 1 renovação de 7 dias (RN-05) (#12)"
-git push -u origin feature/12-renovacao
-gh pr create --base develop --fill --reviewer <colega>
-```
+Os arquivos de configuração versionados (`.github/workflows/`, `.github/CODEOWNERS` e o template de PR) descrevem os controles pretendidos. Eles não provam que o GitHub os executou nem que alguém aprovou uma alteração. Resultados CI, CodeQL, revisores, merge e release devem ser citados somente por seus links e estados observados na plataforma.
 
-## Evidências a anexar na entrega
-- Link da aba *Pull requests* (fechados) mostrando revisões com comentários.
-- Link do *Insights → Contributors* e *Network*.
-- Link do Project Board e dos Milestones fechados.
-- Print da regra de proteção da `main`.
+Até esta documentação ser atualizada com o PR da release, não há registro público de Project Board nem de revisão por pares realizada nas entregas anteriores. O projeto está documentado como trabalho individual de Gabriel Henrique Rodrigues Dantas.

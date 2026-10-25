@@ -1,11 +1,11 @@
 # Como contribuir
 
-1. Pegue uma issue no Project Board e atribua a você.
-2. `git switch -c feature/<n>-<descricao>` a partir da `main` atualizada.
-3. Ordem SDD: atualize a SPEC (se necessário) → escreva o teste → implemente.
-4. `make test` localmente.
-5. Abra o PR usando o template e peça revisão a um colega.
-6. Revisor: rode os testes, leia o diff inteiro, comente, aprove ou peça mudanças.
-7. Merge com *Squash and merge* após CI verde + aprovação.
+1. Confirme a situação das issues existentes no GitHub; não há Project Board configurado/documentado neste repositório.
+2. Atualize sua cópia de `main` e crie uma branch curta, por exemplo `fix/<descricao>` ou `docs/<descricao>`.
+3. Siga SDD: revise a SPEC, acrescente/ajuste o teste e implemente a mudança.
+4. Rode `make lint` e `make coverage`. Se alterar o container, rode `docker compose run --build --rm test` e valide a imagem runtime.
+5. Abra um Pull Request para `main` com resumo, requisitos afetados e evidências dos comandos.
+6. Aguarde a CI e uma aprovação independente; o autor do PR não deve aprovar o próprio trabalho.
+7. Integre somente quando as regras remotas da branch estiverem satisfeitas.
 
-Regras completas em [`docs/GOVERNANCA.md`](docs/GOVERNANCA.md).
+O repositório é documentado como projeto individual. Nomes, papéis, reuniões e revisões só devem ser registrados quando ocorrerem de fato. A governança observada está em [`docs/GOVERNANCA.md`](docs/GOVERNANCA.md).

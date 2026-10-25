@@ -1,6 +1,6 @@
 # ADR-004 — Relógio injetável para regras dependentes de data
 
-**Status:** Aceita · **Data:** [PREENCHER]
+**Status:** Aceita · **Data da decisão:** não registrada no histórico disponível
 
 ## Contexto
 Metade das regras (prazo, atraso, multa, renovação) depende da data atual. Testes que usam `date.today()` são não determinísticos e não conseguem simular "15 dias depois".

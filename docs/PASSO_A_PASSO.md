@@ -1,48 +1,21 @@
-# Passo a passo para publicar o projeto (Entregas 1 e 2)
+# Encerramento da Entrega 3
 
-O histórico de commits, PRs e revisões precisa ser **feito de verdade pelo grupo**. Não alterem datas de commit nem simulem revisões: o GitHub registra quando cada ação ocorreu e isso é fácil de verificar.
+Este guia distingue validações locais das etapas que dependem do GitHub e da gravação pelo estudante.
 
-## 1. Criar o repositório (líder)
-```bash
-gh repo create bibliolivre --public --clone
-cd bibliolivre
-# copie para cá APENAS: README.md, LICENSE, .gitignore, .github/
-git add . && git commit -m "chore: estrutura inicial do repositório"
-git push -u origin main
-git switch -c develop && git push -u origin develop
-```
-Depois: Settings → Branches → proteger `main` e `develop` (ver `docs/GOVERNANCA.md`), adicionar colegas como colaboradores e dar acesso aos professores.
+## 1. Verificação local
 
-## 2. Criar issues e o Project Board
-```bash
-./scripts/criar_issues.sh usuario/bibliolivre
-```
-Crie um Project (Board), adicione as issues e atribua cada uma a um membro.
+No clone do projeto, crie ambiente virtual e instale `.[dev]`. Execute `make lint` e `make coverage`; se houver Docker, execute `docker compose run --build --rm test` e construa a imagem runtime. Registre versões, commit e resultados. Não use dados pessoais reais na demonstração.
 
-## 3. Entregar cada parte por PR (cada membro faz as suas)
-Para cada issue, na ordem da seção 6 da SPEC:
-```bash
-git switch develop && git pull
-git switch -c feature/<n>-<nome>
-# copiar os arquivos daquela unidade + seus testes, LER e ENTENDER o código
-./scripts/run_tests.sh
-git add . && git commit -m "feat: <descrição> (#<n>)"
-git push -u origin feature/<n>-<nome>
-gh pr create --base develop --fill --reviewer <colega>
-```
-O revisor deve comentar de verdade (dúvidas, sugestões) antes de aprovar.
+## 2. Pull Request e revisão humana
 
-Ordem sugerida de PRs (Entrega 1): SPEC + agentes + Docker → models/errors → services + repository + helpers + test_cadastro → test_emprestimos → CLI + test_cli → docs.
+A branch `main` exige Pull Request e uma aprovação independente. Envie a branch `release/1.0.0` para revisão; aguarde CI/CodeQL e a aprovação de uma pessoa real. O autor não deve aprovar o próprio PR. Não altere a proteção nem fabrique comentários para contornar esse requisito.
 
-Entrega 2: correções ERR-06/ERR-07 (transações + `test_lgpd_concorrencia.py`) → RF-09 LGPD → `test_propriedades.py` → CI com lint/cobertura/CodeQL/Dependabot → SECURITY, CHANGELOG, ADR-006/007 → relatório de IA e roteiro.
+## 3. Release versionada
 
-## 4. Fechar a Entrega 1
-```bash
-git switch main && git merge --no-ff develop   # via PR develop → main
-git tag v1.0-entrega1 && git push --tags
-./scripts/run_tests.sh                         # e: docker compose run --rm test
-```
-Tire prints de: Actions verde, execução no Docker, lista de PRs, Project Board. Cole no PDF de submissão.
+Depois que a aprovação e os checks forem concluídos, incorpore o PR em `main`, confirme o commit final, crie a tag `v1.0.0` e publique a Release com notas correspondentes ao `CHANGELOG.md`. Confirme que a página da tag/release aponta para o commit incorporado e que não ficou PR de release aberto. Atualize README, governança e PDF com URLs reais.
 
-## 5. Entrega 2
-Continue nas sprints 3 e 4; os erros e re-especificações do `ERROS_E_RE_ESPECIFICACAO.md` viram issues `bug`/`spec` com PRs próprios. Ao final, tag `v2.0-entrega2`.
+## 4. Vídeo e PDF
+
+Grave uma demonstração de 3–5 minutos usando o roteiro em `docs/ROTEIRO_APRESENTACAO.md`. Publique o arquivo em um serviço autorizado, teste que o link funciona e inclua-o no PDF. Até a gravação existir, não apresente este roteiro como vídeo entregue nem invente URL.
+
+O PDF acadêmico deve informar nome e RA somente na cópia destinada à instituição; evite publicar o RA no repositório público. Inclua link da release, log de testes/cobertura, resultado de CI, link do vídeo e limitações relevantes.

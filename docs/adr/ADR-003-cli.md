@@ -1,6 +1,6 @@
 # ADR-003 — Interface de linha de comando com argparse
 
-**Status:** Aceita · **Data:** [PREENCHER]
+**Status:** Aceita · **Data da decisão:** não registrada no histórico disponível
 
 ## Contexto
 Precisávamos de uma interface utilizável e testável dentro do prazo, sem dependências.

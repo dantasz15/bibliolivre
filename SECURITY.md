@@ -1,16 +1,22 @@
 # Política de Segurança
 
 ## Reportar vulnerabilidade
-Não abra issue pública. Use **Security → Report a vulnerability** (aviso privado do GitHub) ou fale com um mantenedor listado no README. Resposta em até 7 dias.
 
-## Medidas adotadas
-| Risco | Mitigação | Evidência |
+Não publique detalhes de uma vulnerabilidade em issue pública. Use **Security → Report a vulnerability** caso o recurso de reporte privado esteja habilitado no GitHub; se não estiver disponível, contate o mantenedor por [@dantasz15](https://github.com/dantasz15). Não há prazo de resposta de segurança formalmente estabelecido.
+
+## Controles e evidências
+
+| Risco | Controle implementado | Evidência/limite |
 |---|---|---|
-| Injeção de SQL | 100% das consultas parametrizadas (RNF-04) | `test_sql_injection_tratado_como_texto` + CodeQL |
-| Condição de corrida (empréstimo duplo) | Transação `BEGIN IMMEDIATE` (ADR-006) | `test_ultimo_exemplar_disputado_por_varios_processos` |
-| Vazamento de detalhes internos | CLI nunca exibe stack trace (RNF-06) | `test_banco_corrompido_nao_expoe_stack_trace` |
-| Dados pessoais (LGPD) | Anonimização sob demanda (RF-09); `*.db` no `.gitignore` | `TestAnonimizacaoLGPD` |
-| Dependências maliciosas | Zero dependências em produção (RNF-01) | `pyproject.toml` |
-| Container | Imagem slim, usuário não-root | `Dockerfile` |
-| Ações do CI desatualizadas | Dependabot semanal | `.github/dependabot.yml` |
-| Análise estática | CodeQL a cada PR + semanal; Ruff | `.github/workflows/` |
+| Injeção de SQL | Consultas de dados usam parâmetros SQLite. | `test_sql_injection_tratado_como_texto`; CodeQL configurado, resultado depende de execução remota. |
+| Empréstimos concorrentes | `BEGIN IMMEDIATE` engloba validação e gravação. | Teste com oito conexões independentes no mesmo arquivo local; não valida NAS/SMB/NFS. |
+| Exposição de detalhes internos | CLI captura erros SQLite e não apresenta stack trace. | `test_banco_corrompido_nao_expoe_stack_trace`. |
+| Dados pessoais | Anonimização substitui nome e e-mail; arquivos `.db` são ignorados no Git e Docker. | `TestAnonimizacaoLGPD`; a função não comprova conformidade legal integral. |
+| Dependências | Nenhuma dependência de runtime; ferramentas dev são opcionais. | `pyproject.toml`. |
+| Container | Usuário não-root, `.dockerignore` e volume nomeado. | `Dockerfile`, `.dockerignore`, `docker-compose.yml`; execução Docker remota ainda deve ser confirmada. |
+| Atualizações de workflows | Dependabot configurado para dependências/actions. | `.github/dependabot.yml`; dependabot não substitui revisão nem análise de alertas. |
+| Análise estática | Workflow CodeQL e Ruff configurados. | `.github/workflows/codeql.yml`, `.github/workflows/ci.yml`; configuração não equivale a resultado verde. |
+
+## Escopo
+
+BiblioLivre é uma aplicação CLI local, sem autenticação de usuários, servidor web ou sincronização em rede. Não use o projeto como serviço multiusuário em rede sem avaliação adicional de segurança, privacidade, backup e disponibilidade.

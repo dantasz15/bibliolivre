@@ -1,7 +1,7 @@
 """Regras de negócio. Cada regra referencia o requisito da SPEC (docs/SPEC.md)."""
 import re
+from collections.abc import Callable
 from datetime import date, timedelta
-from typing import Callable, List
 
 from .errors import NaoEncontradoError, RegraNegocioError, ValidacaoError
 from .models import Emprestimo, Livro, Membro
@@ -93,10 +93,10 @@ class Biblioteca:
         livro = self._livro(isbn)
         return livro.exemplares - self.repo.ativos_do_livro(livro.isbn)
 
-    def livros(self) -> List[Livro]:
+    def livros(self) -> list[Livro]:
         return self.repo.listar_livros()
 
-    def atrasados(self) -> List[Emprestimo]:
+    def atrasados(self) -> list[Emprestimo]:
         hoje = self.hoje()
         return [e for e in self.repo.todos_ativos() if e.data_prevista < hoje]
 

@@ -1,6 +1,6 @@
 # ADR-006 — Transações explícitas com `BEGIN IMMEDIATE`
 
-**Status:** Aceita · **Data:** [PREENCHER]
+**Status:** Aceita · **Data da decisão:** não registrada no histórico disponível
 
 ## Contexto
 O empréstimo faz *verificar disponibilidade → gravar*. Com o modo padrão do `sqlite3`, a transação só começa na primeira escrita; dois processos (ex.: dois computadores com a mesma pasta compartilhada) podem ler "1 disponível" ao mesmo tempo e ambos gravarem (ERR-06).

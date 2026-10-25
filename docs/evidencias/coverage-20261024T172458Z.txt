@@ -1,8 +1,11 @@
-== BiblioLivre - execução do test harness ==
-Data: Tue Sep 29 00:53:13 UTC 2026
+== BiblioLivre — testes e cobertura de linhas ==
+Data UTC: 2026-10-24T17:24:58Z
 Python: Python 3.12.3
-SO: Linux vm 6.18.44-fc-v37 #1 SMP PREEMPT_DYNAMIC @0 x86_64 x86_64 x86_64 GNU/Linux
-Commit: n/a
+coverage.py: Coverage.py, version 7.17.0 with C extension
+Full documentation is at https://coverage.readthedocs.io/en/7.17.0
+Branch: release/1.0.0
+Commit de referência: 369bbf10eb5b7e0af0c23aa61459afc0e160dda0
+Estado de trabalho: contém alterações
 
 test_cadastra_livro (tests.test_cadastro.TestCadastro.test_cadastra_livro) ... ok
 test_cadastra_membro_normaliza_email (tests.test_cadastro.TestCadastro.test_cadastra_membro_normaliza_email) ... ok
@@ -44,6 +47,7 @@ test_renova_uma_vez (tests.test_emprestimos.TestRenovacao.test_renova_uma_vez) .
 test_renovar_no_ultimo_dia_permitido (tests.test_emprestimos.TestRenovacao.test_renovar_no_ultimo_dia_permitido) ... ok
 test_bloqueia_com_emprestimo_ativo (tests.test_lgpd_concorrencia.TestAnonimizacaoLGPD.test_bloqueia_com_emprestimo_ativo) ... ok
 test_bloqueia_com_multa_pendente (tests.test_lgpd_concorrencia.TestAnonimizacaoLGPD.test_bloqueia_com_multa_pendente) ... ok
+test_colisao_de_email_sentinela_nao_impede_anonimizacao (tests.test_lgpd_concorrencia.TestAnonimizacaoLGPD.test_colisao_de_email_sentinela_nao_impede_anonimizacao) ... ok
 test_email_original_fica_livre_para_novo_cadastro (tests.test_lgpd_concorrencia.TestAnonimizacaoLGPD.test_email_original_fica_livre_para_novo_cadastro) ... ok
 test_membro_inexistente (tests.test_lgpd_concorrencia.TestAnonimizacaoLGPD.test_membro_inexistente) ... ok
 test_remove_nome_e_email_preservando_historico (tests.test_lgpd_concorrencia.TestAnonimizacaoLGPD.test_remove_nome_e_email_preservando_historico) ... ok
@@ -55,6 +59,17 @@ RN-06/07: mais dias de atraso nunca geram multa menor, e nunca passa do teto. ..
 test_simulacao_aleatoria (tests.test_propriedades.TestInvariantes.test_simulacao_aleatoria) ... ok
 
 ----------------------------------------------------------------------
-Ran 46 tests in 0.347s
+Ran 47 tests in 1.135s
 
 OK
+
+Name                        Stmts   Miss  Cover   Missing
+---------------------------------------------------------
+bibliolivre/__init__.py         1      0   100%
+bibliolivre/cli.py             83      0   100%
+bibliolivre/errors.py           4      0   100%
+bibliolivre/models.py          27      0   100%
+bibliolivre/repository.py      90      0   100%
+bibliolivre/services.py       143      0   100%
+---------------------------------------------------------
+TOTAL                         348      0   100%

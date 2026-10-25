@@ -9,8 +9,7 @@ import unittest
 from datetime import date, timedelta
 
 from bibliolivre.errors import BiblioError
-from bibliolivre.services import (MAX_EMPRESTIMOS, MAX_RENOVACOES,
-                                  TETO_MULTA_CENTAVOS, Biblioteca)
+from bibliolivre.services import MAX_EMPRESTIMOS, MAX_RENOVACOES, TETO_MULTA_CENTAVOS, Biblioteca
 from tests.helpers import nova_biblioteca
 
 ISBNS = ["9788535902778", "9780306406157", "9788533302273", "9780140449136", "9780262033848"]

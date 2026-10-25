@@ -43,7 +43,7 @@ class TestCli(unittest.TestCase):
     def test_banco_corrompido_nao_expoe_stack_trace(self):
         with open(self.db, "w") as f:
             f.write("isto não é um banco sqlite")
-        code, out, err = rodar(self.db, "livros")
+        code, _out, err = rodar(self.db, "livros")
         self.assertEqual(code, 3)
         self.assertIn("falha ao acessar o banco", err)
         self.assertNotIn("Traceback", err)

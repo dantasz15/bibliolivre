@@ -1,44 +1,29 @@
-# Roteiro da Apresentação / Vídeo (≈ 8 min)
+# Roteiro da Demonstração Funcional — 3 a 5 minutos
 
-| Tempo | Quem | Conteúdo | O que mostrar na tela |
-|---|---|---|---|
-| 0:00–1:00 | Membro 1 | Problema: biblioteca comunitária no caderno; público sem internet e sem TI | Slide com o problema |
-| 1:00–2:00 | Membro 1 | SDD: SPEC como fonte da verdade, IDs RN-xx rastreados até os testes | `docs/SPEC.md` + matriz em `docs/TESTES.md` |
-| 2:00–3:30 | Membro 2 | Demo ao vivo: cadastrar, emprestar, atrasar, multa, pagar | `make demo` ou comandos do README |
-| 3:30–4:30 | Membro 3 | Arquitetura e 2 ADRs mais importantes (006 concorrência, 005 centavos) | Diagrama do README |
-| 4:30–5:30 | Membro 3 | Testes: 46 testes, 100% de cobertura, propriedade, concorrência; CI verde | Aba Actions |
-| 5:30–6:30 | Membro 4 | Loop de re-especificação: RE-03 (brecha de bloqueio) e RE-05 (ética virou requisito) | `docs/ERROS_E_RE_ESPECIFICACAO.md` |
-| 6:30–7:30 | Membro 4 | IA: onde ajudou, onde errou, por que a revisão humana é obrigatória | `docs/RELATORIO_IA.md` |
-| 7:30–8:00 | Todos | Aprendizados e o que fariam diferente | — |
+**Status:** roteiro preparado. A gravação e o envio para YouTube, Drive, Loom ou SharePoint ainda precisam ser feitos pelo estudante/equipe. Este arquivo não representa um vídeo gravado nem contém link fictício.
 
-## Perguntas prováveis na defesa (e respostas curtas)
+| Tempo | O que narrar | O que mostrar |
+|---|---|---|
+| 0:00–0:30 | Apresentar o problema: bibliotecas comunitárias controlam empréstimos manualmente e precisam de uma ferramenta local, sem servidor. | README e objetivo do BiblioLivre. |
+| 0:30–1:00 | Explicar a arquitetura: CLI, serviços, repositório SQLite e especificação com requisitos rastreáveis. | `docs/SPEC.md` seção As-Built e diagrama do README. |
+| 1:00–2:10 | Executar o fluxo: cadastrar livro e membro, emprestar, verificar disponibilidade, renovar e devolver. | Terminal com `make demo` ou comandos do README. Usar apenas dados fictícios. |
+| 2:10–2:45 | Mostrar regras de negócio e privacidade, incluindo anonimização do membro e histórico preservado. | `docs/SPEC.md`, comando `membro-anonimizar` e teste da colisão do e-mail sentinela. |
+| 2:45–3:35 | Executar a suíte e explicar o que a evidência mede. | `make coverage`; mostrar total de testes e relatório de cobertura. Esclarecer que cobertura não prova ausência de bugs. |
+| 3:35–4:15 | Apresentar a versão e os limites da governança: release na `main`, CI, aprovação humana e ausência de revisão entre pares até existir aprovação real. | PR da release e status do GitHub Actions, após publicados. |
+| 4:15–4:30 | Resumir um aprendizado: a auditoria detectou uma colisão de unicidade não coberta; foi corrigida e ganhou teste de regressão. | Teste `test_colisao_de_email_sentinela_nao_impede_anonimizacao`. |
 
-**Por que não um sistema web?**
-O público-alvo não tem servidor nem internet confiável (RNF-02). A arquitetura em camadas permite trocar a CLI por uma interface web sem mexer nas regras (ADR-001, ADR-003).
+## Antes de gravar
 
-**Por que SQLite e não PostgreSQL?**
-Zero instalação, backup copiando um arquivo. O limite é o acesso multiusuário em rede, fora do escopo (ADR-002).
+1. Atualizar o código local com a release revisada.
+2. Criar um banco de demonstração descartável e usar somente nomes/e-mails fictícios.
+3. Confirmar que a pipeline e o link de release exibidos correspondem à versão entregue.
+4. Gravar entre 3 e 5 minutos, sem expor RA em terminal, segredos, dados pessoais reais ou abas privadas.
+5. Publicar o vídeo e inserir o link verificável no PDF de submissão final.
 
-**Como vocês garantem que dois voluntários não emprestam o mesmo último livro?**
-Com `BEGIN IMMEDIATE`, que pega o lock de escrita antes de verificar a disponibilidade (ADR-006). O teste dispara 8 conexões ao mesmo tempo e confere que só uma vence.
+## Perguntas prováveis
 
-**Por que centavos e não float?**
-`0.1 + 0.2 != 0.3` em ponto flutuante. Tivemos esse bug (ERR-02) e a correção virou o ADR-005.
-
-**O que é um teste de propriedade?**
-Em vez de testar um exemplo, gera milhares de operações aleatórias e verifica regras que sempre devem valer, como disponibilidade nunca negativa. A semente é fixa para a falha poder ser reproduzida (ADR-007).
-
-**100% de cobertura significa que não há bugs?**
-Não. Significa que toda linha foi executada, não que todo comportamento foi verificado. Por isso complementamos com testes de borda, de propriedade e de concorrência.
-
-**Qual foi a maior contribuição da IA? E o maior erro?**
-[Responder com a experiência real do grupo.] Sugestão de estrutura: ajudou no boilerplate e em sugerir casos de teste; não percebeu sozinha a corrida (ERR-06) nem a brecha de regra (RE-03).
-
-**O código gerado por IA é de quem?**
-A autoria é juridicamente incerta; a Lei 9.610/98 pressupõe autor humano. Mitigamos revisando e entendendo cada linha, e declarando o uso de IA em cada PR.
-
-**Por que a revisão humana é obrigatória se os testes passam?**
-Testes provam que o código cumpre os testes, não que os testes cumprem a necessidade. Quem decide a regra (ex.: teto da multa) é humano, e a responsabilidade pelo merge também.
-
-**Mostre uma regra da SPEC no código e no teste.**
-RN-07: `TETO_MULTA_CENTAVOS` em `services.py` → `test_calculo_multa_limites` (casos 40 e 41 dias) → `test_multa_monotona_e_limitada`.
+- **Por que CLI e SQLite?** O escopo foi pensado para bibliotecas pequenas, uso local e operação offline; uma interface web e múltiplas bibliotecas ficaram fora do escopo.
+- **Como a aplicação trata multas?** R$ 0,50 por dia de atraso, com teto de R$ 20,00 por empréstimo; valores são armazenados em centavos.
+- **O que acontece com concorrência?** A operação de empréstimo usa `BEGIN IMMEDIATE`; há teste com oito conexões independentes disputando um exemplar. Isso não comprova suporte em filesystem de rede.
+- **100% de cobertura garante ausência de erros?** Não; é a proporção de linhas executadas na suíte, não prova que todos os requisitos e casos de uso estão corretos.
+- **Quem homologa uma alteração?** Testes e CI são evidências automatizadas; a aprovação independente de uma pessoa real continua sendo necessária para integrar a release na `main`.

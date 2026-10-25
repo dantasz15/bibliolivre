@@ -1,6 +1,5 @@
 from dataclasses import dataclass
 from datetime import date
-from typing import Optional
 
 
 @dataclass(frozen=True)
@@ -25,7 +24,7 @@ class Emprestimo:
     membro_id: int
     data_emprestimo: date
     data_prevista: date
-    data_devolucao: Optional[date]
+    data_devolucao: date | None
     renovacoes: int
     multa_centavos: int
     multa_paga: bool

@@ -7,7 +7,7 @@ USER app
 
 FROM base AS test
 COPY tests/ tests/
-RUN python -m unittest discover -s tests -t . -v
+ENTRYPOINT ["python", "-m", "unittest", "discover", "-s", "tests", "-t", ".", "-v"]
 
 FROM base AS runtime
 ENTRYPOINT ["python", "-m", "bibliolivre"]

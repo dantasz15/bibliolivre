@@ -1,6 +1,15 @@
 __pycache__/
 *.pyc
 *.db
+*.db-journal
 .env
+.env.*
+!.env.example
 .venv/
+venv/
 .coverage
+coverage.xml
+htmlcov/
+build/
+dist/
+*.egg-info/
