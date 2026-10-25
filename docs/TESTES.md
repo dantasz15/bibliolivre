@@ -39,7 +39,7 @@ No commit `fd8d14d` (`fd8d14dc0ae63bafaf5af42cbacb5612b9699a95`), o evento `pull
 - As workflows usam checkout, setup-python e upload-artifact v7 e CodeQL Action v4, compatíveis com Node.js 24; os logs finais não registram os avisos de depreciação da execução anterior.
 - Artefatos `coverage-python-3.10`, `coverage-python-3.11` e `coverage-python-3.12` foram enviados ao Actions e ficam disponíveis até 24/11/2026. Para baixar: `gh run download 40212926287 --repo dantasz15/bibliolivre`.
 
-A primeira execução da candidata identificou em Python 3.10 a ausência do suporte TOML do Coverage. A dependência foi corrigida para `coverage[toml]`; os resultados acima pertencem ao commit validado com essa correção e com as Actions atualizadas. O PR continua draft e a integração/release ainda depende de aprovação humana independente.
+A primeira execução da candidata identificou em Python 3.10 a ausência do suporte TOML do Coverage. A dependência foi corrigida para `coverage[toml]`; os resultados acima pertencem ao commit validado com essa correção e com as Actions atualizadas. O PR está pronto para revisão; a integração/release ainda depende de aprovação humana independente.
 
 ## Comandos reproduzíveis
 
