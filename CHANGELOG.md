@@ -16,6 +16,9 @@ Formato inspirado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/)
 - Tipos e imports identificados pelo Ruff.
 - URLs, documentação de governança e afirmações de testes que não estavam comprovadas.
 
+### Atualizado
+- Atualiza checkout, setup-python e upload-artifact para a major 7 e CodeQL Action para v4, com suporte nativo a Node.js 24.
+
 ### Validação local
 - 47 testes aprovados; 100% de cobertura de linhas em 348 instruções executáveis; Ruff aprovado.
 
