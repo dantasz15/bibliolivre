@@ -12,6 +12,7 @@ Formato inspirado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/)
 
 ### Corrigido
 - Colisão de unicidade do e-mail sentinela durante anonimização, com teste de regressão.
+- Dependência TOML explícita para coverage.py em Python 3.10, identificada na primeira execução do CI.
 - Tipos e imports identificados pelo Ruff.
 - URLs, documentação de governança e afirmações de testes que não estavam comprovadas.
 
