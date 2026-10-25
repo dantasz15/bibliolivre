@@ -23,7 +23,8 @@ Formato inspirado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/)
 - 47 testes aprovados; 100% de cobertura de linhas em 348 instruções executáveis; Ruff aprovado.
 
 ### Validação remota
-- CI, matriz Python 3.10–3.12, harness Docker e CodeQL passaram no [PR #9](https://github.com/dantasz15/bibliolivre/pull/9), commit `0eb22aa`.
+- CI, matriz Python 3.10–3.12, harness Docker e CodeQL v4 passaram no [PR #9](https://github.com/dantasz15/bibliolivre/pull/9), commit `fd8d14d`; 12 verificações concluíram sem falhas.
+- Os workflows com Actions v7 e Node.js 24 passaram sem avisos de depreciação no run final.
 - A tag `v1.0.0` ainda não foi publicada: o PR aguarda aprovação independente e a demonstração em vídeo ainda precisa ser gravada.
 
 ## Histórico acadêmico anterior (não são releases SemVer publicadas)

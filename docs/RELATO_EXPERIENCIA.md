@@ -16,7 +16,7 @@ Para esta preparação da release, as alterações estão isoladas em uma branch
 - `coverage.py` mediu 100% de cobertura de linhas nos módulos incluídos, totalizando 348 instruções executáveis nessa execução.
 - Ruff não encontrou problemas no código e nos testes.
 - O cenário `make demo` concluiu cadastro de livro e membro, empréstimo, renovação, devolução e anonimização.
-- O ambiente local não dispunha de Docker; no GitHub Actions, o harness Docker executou 47 testes e o build da imagem runtime passou no commit `0eb22aa`.
+- O ambiente local não dispunha de Docker; no GitHub Actions, o harness Docker executou 47 testes e o build da imagem runtime passou no commit `fd8d14d`.
 
 ## 4. Desafios e correções
 
@@ -29,7 +29,7 @@ Também foram corrigidas instruções de build Docker para usar volume nomeado e
 - Manter a SPEC explícita ajuda a rastrear as regras, mas o As-Built precisa ser conferido contra o código e a API efetivos.
 - Testes de regressão transformam um achado de revisão em uma proteção repetível.
 - Cobertura de 100% de linhas não é sinônimo de ausência de bugs: o caso de colisão só apareceu na auditoria de combinações de dados.
-- A CI validou Python 3.10–3.12, Docker e CodeQL no PR #9; os resultados são vinculados ao commit candidato `0eb22aa`.
+- A CI validou 47 testes em cada versão Python 3.10–3.12, cobertura de 100% em 348 instruções, Docker e CodeQL v4 no PR #9; os resultados são vinculados ao commit candidato `fd8d14d`.
 - Revisão humana independente não pode ser substituída por IA ou pela aprovação dos testes.
 
 ## 6. Próximos passos para encerrar

@@ -33,4 +33,4 @@ O PR da release não altera a ausência de registro histórico de Project Board 
 
 ## Estado da candidata à release — 25 de outubro de 2026
 
-O [PR #9](https://github.com/dantasz15/bibliolivre/pull/9), branch `release/1.0.0` → `main`, está aberto em draft no commit `0eb22aa`. CI (Python 3.10–3.12, lint e Docker) e CodeQL passaram; ver os [checks da execução do PR](https://github.com/dantasz15/bibliolivre/actions/runs/40212336837) e a [execução CodeQL](https://github.com/dantasz15/bibliolivre/actions/runs/40212336839). A decisão remota continua `REVIEW_REQUIRED`, não há revisor atribuído e não houve merge nem tag `v1.0.0`.
+O [PR #9](https://github.com/dantasz15/bibliolivre/pull/9), branch `release/1.0.0` → `main`, foi verificado em draft no commit de implementação e workflows `fd8d14d` (`fd8d14dc0ae63bafaf5af42cbacb5612b9699a95`). As 12 verificações passaram: [CI do PR](https://github.com/dantasz15/bibliolivre/actions/runs/40212926287) e [CodeQL v4](https://github.com/dantasz15/bibliolivre/actions/runs/40212926292). A decisão remota continua `REVIEW_REQUIRED`, não há revisor atribuído e não houve merge nem tag `v1.0.0`.
