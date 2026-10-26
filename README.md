@@ -1,8 +1,8 @@
 # 📚 BiblioLivre
 
-![CI](https://github.com/<ORG>/<REPO>/actions/workflows/ci.yml/badge.svg)
-![CodeQL](https://github.com/<ORG>/<REPO>/actions/workflows/codeql.yml/badge.svg)
-![Cobertura](https://img.shields.io/badge/cobertura-100%25-brightgreen)
+![CI](https://github.com/dantasz15/bibliolivre/actions/workflows/ci.yml/badge.svg)
+![CodeQL](https://github.com/dantasz15/bibliolivre/actions/workflows/codeql.yml/badge.svg)
+![Cobertura](https://img.shields.io/badge/meta%20de%20cobertura-%E2%89%A595%25-blue)
 ![Python](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12-blue)
 ![Dependências](https://img.shields.io/badge/depend%C3%AAncias-0-brightgreen)
 
@@ -11,6 +11,8 @@ Sistema de empréstimos para **bibliotecas comunitárias** (escolas, associaçõ
 O BiblioLivre controla acervo, membros, empréstimos, renovações, atrasos e multas pela linha de comando, com banco SQLite local — sem servidor, sem internet, sem dependências externas.
 
 > Projeto desenvolvido com **SDD (Spec-Driven Development)**: a especificação em [`docs/SPEC.md`](docs/SPEC.md) é a fonte da verdade; código e testes referenciam os IDs das regras (RF-xx / RN-xx).
+
+> **Entrega 3 — Entrega Final:** candidata à release no [PR #9](https://github.com/dantasz15/bibliolivre/pull/9). A CI e o CodeQL passaram, mas o PR ainda aguarda revisão humana independente; não há tag `v1.0.0` nem vídeo de demonstração publicado. O estado detalhado está em [`docs/GOVERNANCA.md`](docs/GOVERNANCA.md).
 
 ## Sumário
 - [Instalação e execução](#instalação-e-execução)
@@ -27,22 +29,33 @@ O BiblioLivre controla acervo, membros, empréstimos, renovações, atrasos e mu
 
 ### Opção A — Python local
 ```bash
-git clone https://github.com/<ORG>/<REPO>.git
-cd <REPO>
+git clone https://github.com/dantasz15/bibliolivre.git
+cd bibliolivre
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -e .
 python -m bibliolivre --help
+```
+
+Para lint e relatório de cobertura, instale as dependências opcionais de desenvolvimento:
+
+```bash
+python -m pip install -e ".[dev]"
+make lint
+make coverage
 ```
 
 ### Opção B — Docker (ambiente padronizado)
 ```bash
-docker build -t bibliolivre .
-docker run --rm -v "$PWD/dados:/dados" bibliolivre livros
-docker build --target test .   # roda os testes dentro do container
+docker build --target runtime -t bibliolivre:1.0.0 .
+docker volume create bibliolivre-dados
+docker run --rm -v bibliolivre-dados:/dados bibliolivre:1.0.0 livros
 ```
 
 ### Opção B2 — Docker Compose
 ```bash
-docker compose run --rm test          # roda o test harness no container
-docker compose run --rm app livros    # usa a aplicação (dados em ./dados)
+docker compose run --build --rm test  # executa o harness na imagem de teste
+docker compose run --rm app livros    # dados persistem em volume nomeado
 ```
 
 ### Opção C — Make
@@ -80,28 +93,22 @@ Códigos de saída: `0` sucesso, `1` erro de regra/validação, `2` argumento in
 | RN-06 | Multa de R$ 0,50 por dia de atraso (devolver no dia do prazo não gera multa) |
 | RN-07 | Teto de multa: R$ 20,00 por empréstimo |
 | RF-09 | Anonimização de membro a pedido do titular (LGPD) |
-| RNF-07 | Seguro com dois computadores usando o mesmo arquivo de banco |
+| RNF-07 | Transações seguras entre conexões no mesmo SQLite local; não validado em filesystem de rede |
 
 ## Testes
 
 ```bash
 python -m unittest discover -s tests -t . -v
-./scripts/run_tests.sh      # mesmo comando + salva log em docs/evidencias/
+make coverage              # testes + relatório texto/XML, limiar >=95%
+make lint                  # Ruff
+./scripts/run_tests.sh     # log da execução simples em docs/evidencias/
 ```
 
-### Log da última execução
-```
-Ran 46 tests in 0.35s
-
-OK
-Cobertura de linhas: 100% (mínimo no CI: 95%)
-```
-Logs completos em [`docs/evidencias/`](docs/evidencias/) e como artefato de cada execução do GitHub Actions.
-46 testes em quatro níveis: unidade, integração (CLI e banco real), concorrência (8 conexões simultâneas) e **testes de propriedade** (mais de 2.000 operações aleatórias verificando invariantes). Pipeline do CI: Ruff → testes com cobertura em 3 versões de Python → testes no Docker; CodeQL em paralelo. Resultados e matriz de rastreabilidade em [`docs/TESTES.md`](docs/TESTES.md). A suíte roda automaticamente no GitHub Actions a cada push e Pull Request (Python 3.10–3.12).
+Resultados reproduzidos, versão do Python, quantidade de testes, cobertura medida e links das execuções oficiais estão em [`docs/TESTES.md`](docs/TESTES.md). O workflow de CI valida Ruff, testes com limiar de cobertura de 95% em Python 3.10–3.12 e Docker; CodeQL roda em workflow separado. Confira os status atuais nas abas [Actions](https://github.com/dantasz15/bibliolivre/actions) e [Security](https://github.com/dantasz15/bibliolivre/security/code-scanning).
 
 ## Agentes de IA
 
-O repositório inclui arquivos de instrução para Claude Code (`CLAUDE.md`), Codex CLI (`AGENTS.md`) e Cursor (`.cursorrules`). Todos obrigam o agente a seguir a SPEC, escrever o teste antes do código e respeitar as regras de segurança. Detalhes em [`docs/AGENTES_IA.md`](docs/AGENTES_IA.md).
+O repositório inclui arquivos de instrução para Claude Code (`CLAUDE.md`), Codex CLI (`AGENTS.md`) e Cursor (`.cursorrules`). Esses arquivos são orientações versionadas e não comprovam a execução de cada ferramenta; os limites da evidência estão em [`docs/AGENTES_IA.md`](docs/AGENTES_IA.md).
 
 ## Decisões arquiteturais (ADRs — resumo)
 | ADR | Decisão | Principal trade-off |
@@ -169,27 +176,27 @@ flowchart TD
 
 | Documento | Conteúdo |
 |---|---|
-| [`docs/SPEC.md`](docs/SPEC.md) | Especificação técnica (v1.1), contratos de E/S e decomposição em unidades |
+| [`docs/SPEC.md`](docs/SPEC.md) | Especificação técnica e seção As-Built da release 1.0.0 |
 | [`docs/AGENTES_IA.md`](docs/AGENTES_IA.md) | Configuração dos agentes (`CLAUDE.md`, `AGENTS.md`, `.cursorrules`) |
-| [`docs/adr/`](docs/adr/) | Registros de Decisão de Arquitetura (ADR-001 a ADR-005) |
+| [`docs/adr/`](docs/adr/) | Registros de Decisão de Arquitetura (ADR-001 a ADR-007) |
 | [`docs/TESTES.md`](docs/TESTES.md) | Resultado dos testes e rastreabilidade SPEC → teste |
 | [`docs/ERROS_E_RE_ESPECIFICACAO.md`](docs/ERROS_E_RE_ESPECIFICACAO.md) | Erros lógicos encontrados e loop de re-especificação |
-| [`docs/GOVERNANCA.md`](docs/GOVERNANCA.md) | Branches, PRs, code review, sprints e issues |
-| [`docs/RELATORIO_IA.md`](docs/RELATORIO_IA.md) | Análise comparativa de ferramentas de IA + ética e segurança |
-| [`docs/RELATO_EXPERIENCIA.md`](docs/RELATO_EXPERIENCIA.md) | Aprendizados e desafios do grupo |
+| [`docs/GOVERNANCA.md`](docs/GOVERNANCA.md) | Proteção de branch verificada e fluxo de contribuição recomendado |
+| [`docs/RELATORIO_IA.md`](docs/RELATORIO_IA.md) | Uso observado de IA, riscos, ética e limites da evidência |
+| [`docs/RELATO_EXPERIENCIA.md`](docs/RELATO_EXPERIENCIA.md) | Retrospectiva técnica individual baseada em evidências |
 | [`CONTRIBUTING.md`](CONTRIBUTING.md) | Como contribuir |
 | [`SECURITY.md`](SECURITY.md) | Política e medidas de segurança |
 | [`CHANGELOG.md`](CHANGELOG.md) | Histórico de versões |
-| [`docs/ROTEIRO_APRESENTACAO.md`](docs/ROTEIRO_APRESENTACAO.md) | Roteiro da apresentação/vídeo e perguntas prováveis |
+| [`docs/ROTEIRO_APRESENTACAO.md`](docs/ROTEIRO_APRESENTACAO.md) | Roteiro de demonstração de 3–5 minutos; gravação é etapa humana |
+| [`docs/PASSO_A_PASSO.md`](docs/PASSO_A_PASSO.md) | Passos para CI, revisão, release e vídeo da entrega |
 
 ## Equipe
 
 | Nome | GitHub | Papel principal |
 |---|---|---|
-| [PREENCHER] | @ | Tech lead / revisão |
-| [PREENCHER] | @ | Regras de negócio (services) |
-| [PREENCHER] | @ | Persistência e CLI |
-| [PREENCHER] | @ | Testes, CI e documentação |
+| Gabriel Henrique Rodrigues Dantas | [@dantasz15](https://github.com/dantasz15) | Autoria individual |
+
+O RA acadêmico não é publicado neste repositório público; consta somente no documento de submissão.
 
 ## Licença
 MIT — ver [`LICENSE`](LICENSE).

@@ -1,6 +1,6 @@
 # ADR-007 — Testes de propriedade sem dependências externas
 
-**Status:** Aceita · **Data:** [PREENCHER]
+**Status:** Aceita · **Data da decisão:** não registrada no histórico disponível
 
 ## Contexto
 Testes por exemplo só verificam os casos em que a equipe pensou. Os erros ERR-01 e RE-03 mostraram que as falhas estavam justamente nos casos não imaginados.

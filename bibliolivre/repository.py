@@ -1,8 +1,8 @@
 """Persistência em SQLite (ADR-002). Somente consultas parametrizadas."""
 import sqlite3
+from collections.abc import Iterator
 from contextlib import contextmanager
 from datetime import date
-from typing import Iterator, List, Optional
 
 from .models import Emprestimo, Livro, Membro
 
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS emprestimos (
 """
 
 
-def _d(valor: Optional[str]) -> Optional[date]:
+def _d(valor: str | None) -> date | None:
     return date.fromisoformat(valor) if valor else None
 
 
@@ -77,11 +77,11 @@ class Repositorio:
                 (livro.isbn, livro.titulo, livro.autor, livro.exemplares),
             )
 
-    def buscar_livro(self, isbn: str) -> Optional[Livro]:
+    def buscar_livro(self, isbn: str) -> Livro | None:
         r = self.conn.execute("SELECT * FROM livros WHERE isbn = ?", (isbn,)).fetchone()
         return Livro(r["isbn"], r["titulo"], r["autor"], r["exemplares"]) if r else None
 
-    def listar_livros(self) -> List[Livro]:
+    def listar_livros(self) -> list[Livro]:
         rows = self.conn.execute("SELECT * FROM livros ORDER BY titulo").fetchall()
         return [Livro(r["isbn"], r["titulo"], r["autor"], r["exemplares"]) for r in rows]
 
@@ -93,11 +93,11 @@ class Repositorio:
             )
         return Membro(cur.lastrowid, nome, email)
 
-    def buscar_membro(self, membro_id: int) -> Optional[Membro]:
+    def buscar_membro(self, membro_id: int) -> Membro | None:
         r = self.conn.execute("SELECT * FROM membros WHERE id = ?", (membro_id,)).fetchone()
         return Membro(r["id"], r["nome"], r["email"]) if r else None
 
-    def buscar_membro_por_email(self, email: str) -> Optional[Membro]:
+    def buscar_membro_por_email(self, email: str) -> Membro | None:
         r = self.conn.execute("SELECT * FROM membros WHERE email = ?", (email,)).fetchone()
         return Membro(r["id"], r["nome"], r["email"]) if r else None
 
@@ -119,11 +119,11 @@ class Repositorio:
             )
         return self.buscar_emprestimo(cur.lastrowid)
 
-    def buscar_emprestimo(self, emp_id: int) -> Optional[Emprestimo]:
+    def buscar_emprestimo(self, emp_id: int) -> Emprestimo | None:
         r = self.conn.execute("SELECT * FROM emprestimos WHERE id = ?", (emp_id,)).fetchone()
         return self._emp(r) if r else None
 
-    def ativos_do_membro(self, membro_id: int) -> List[Emprestimo]:
+    def ativos_do_membro(self, membro_id: int) -> list[Emprestimo]:
         rows = self.conn.execute(
             "SELECT * FROM emprestimos WHERE membro_id = ? AND data_devolucao IS NULL",
             (membro_id,),
@@ -136,7 +136,7 @@ class Repositorio:
             (isbn,),
         ).fetchone()[0]
 
-    def todos_ativos(self) -> List[Emprestimo]:
+    def todos_ativos(self) -> list[Emprestimo]:
         rows = self.conn.execute(
             "SELECT * FROM emprestimos WHERE data_devolucao IS NULL ORDER BY data_prevista"
         ).fetchall()
@@ -166,9 +166,14 @@ class Repositorio:
 
     def anonimizar_membro(self, membro_id: int) -> None:
         with self.transacao():
+            email = f"anonimizado-{membro_id}@invalido.local"
+            sufixo = 2
+            while self.buscar_membro_por_email(email) is not None:
+                email = f"anonimizado-{membro_id}-{sufixo}@invalido.local"
+                sufixo += 1
             self.conn.execute(
                 "UPDATE membros SET nome = ?, email = ? WHERE id = ?",
-                (f"Membro anonimizado #{membro_id}", f"anonimizado-{membro_id}@invalido.local", membro_id),
+                (f"Membro anonimizado #{membro_id}", email, membro_id),
             )
 
     def quitar_multas(self, membro_id: int) -> int:

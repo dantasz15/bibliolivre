@@ -1,6 +1,6 @@
 # ADR-002 — SQLite como armazenamento
 
-**Status:** Aceita · **Data:** [PREENCHER]
+**Status:** Aceita · **Data da decisão:** não registrada no histórico disponível
 
 ## Contexto
 RNF-01/RNF-02: sem internet, sem servidor, computadores modestos, voluntários sem conhecimento de infraestrutura.

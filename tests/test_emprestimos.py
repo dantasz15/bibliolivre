@@ -2,7 +2,7 @@ import unittest
 from datetime import timedelta
 
 from bibliolivre.errors import NaoEncontradoError, RegraNegocioError, ValidacaoError
-from bibliolivre.services import Biblioteca, PRAZO_DIAS
+from bibliolivre.services import PRAZO_DIAS, Biblioteca
 from tests.helpers import ISBN_A, ISBN_B, ISBN_C, nova_biblioteca
 
 ISBN_D = "9780140449136"

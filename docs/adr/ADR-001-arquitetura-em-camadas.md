@@ -1,6 +1,6 @@
 # ADR-001 — Arquitetura em camadas (CLI → Serviço → Repositório)
 
-**Status:** Aceita · **Data:** [PREENCHER]
+**Status:** Aceita · **Data da decisão:** não registrada no histórico disponível
 
 ## Contexto
 Equipe pequena, prazo curto, necessidade de testar regras de negócio isoladamente.

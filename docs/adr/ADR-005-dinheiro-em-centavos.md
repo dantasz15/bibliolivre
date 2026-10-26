@@ -1,6 +1,6 @@
 # ADR-005 — Valores monetários em centavos inteiros
 
-**Status:** Aceita (substitui a abordagem inicial com `float`) · **Data:** [PREENCHER]
+**Status:** Aceita (substitui a abordagem inicial com `float`) · **Data da decisão:** não registrada no histórico disponível
 
 ## Contexto
 A primeira versão calculava multa como `dias * 0.5` em `float`. Somas de várias multas geravam valores como `1.4999999` e comparações `== 1.5` falhavam (ver ERR-02).

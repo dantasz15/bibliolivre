@@ -1,14 +1,15 @@
-# Especificação Técnica — BiblioLivre (v1.2)
+# Especificação Técnica — BiblioLivre (v1.3 As-Built, candidata à release 1.0.0)
 
 ## Histórico de versões
 | Versão | Entrega | Mudanças |
 |---|---|---|
 | v0.1 | E1 (rascunho) | Problema, escopo, RF-01..RF-08, RN-01..RN-06 |
-| v1.0 | E1 (final) | Após revisão do grupo: adicionada RN-04 (mesmo título), RN-08 (disponibilidade); ISBN passa a exigir dígito verificador; contratos de E/S (seção 5) |
+| v1.0 | E1 (final) | Adicionada RN-04 (mesmo título), RN-08 (disponibilidade); ISBN passa a exigir dígito verificador; contratos de E/S (seção 5) |
 | v1.1 | E2 | Loop de re-especificação RE-01..RE-04 (ver `ERROS_E_RE_ESPECIFICACAO.md`) |
 | v1.2 | E2 | RE-05: RF-09 (LGPD) e RNF-07 (atomicidade/concorrência) |
+| v1.3 | E3 — Entrega Final (As-Built) | Conferência dos requisitos, API, schema e componentes contra o código candidato à release 1.0.0; precisão do escopo de concorrência e correção da colisão do e-mail sentinela |
 
-> Histórico: v1.0 (Entrega 1) → v1.1 (esta entrega, após o loop de re-especificação descrito em `ERROS_E_RE_ESPECIFICACAO.md`). Alterações da v1.1 marcadas com **[RE-xx]**.
+> Histórico: v1.0 (Entrega 1) → v1.1/v1.2 (refinamentos da Entrega 2 descritos em `ERROS_E_RE_ESPECIFICACAO.md`) → v1.3 (As-Built da Entrega 3 — Entrega Final). Este registro descreve evolução documental; não representa revisão de grupo nem validação de usuário externo.
 
 ## 1. Problema
 Bibliotecas comunitárias controlam empréstimos em papel. Consequências: livros não devolvidos, ninguém sabe quais estão atrasados, cobrança de multa inconsistente. Público: voluntários sem formação técnica, computadores modestos e muitas vezes sem internet.
@@ -109,5 +110,42 @@ flowchart LR
 | RNF-04 | Consultas SQL sempre parametrizadas |
 | RNF-05 | Toda regra RN-xx coberta por ao menos um teste automatizado |
 | RNF-06 | Mensagens de erro em português, sem stack trace para o usuário |
-| RNF-07 | **Operações de escrita atômicas e seguras com acesso simultâneo ao mesmo arquivo [RE-05]** |
+| RNF-07 | **Operações de escrita atômicas e seguras para conexões simultâneas ao mesmo arquivo SQLite local, usando `BEGIN IMMEDIATE` [RE-05]** |
 | RNF-08 | Cobertura de testes ≥ 95% das linhas, verificada no CI |
+
+## 8. As-Built do candidato à release 1.0.0
+
+Esta seção descreve a implementação efetiva do código deste repositório. A tag oficial de release somente será considerada entregue depois que o PR de release for revisado e incorporado à branch `main`.
+
+### 8.1 Componentes e responsabilidades
+
+| Componente | Implementação entregue |
+|---|---|
+| `bibliolivre/cli.py` | CLI `argparse`, resolução de `--db`/`BIBLIO_DB`, mensagens em português e códigos de saída. |
+| `bibliolivre/services.py` | Classe `Biblioteca`, validação ISBN-13, regras RF/RN, multa em centavos, anonimização e relógio injetável. |
+| `bibliolivre/repository.py` | Persistência SQLite, schema, consultas parametrizadas, chaves estrangeiras e transações `BEGIN IMMEDIATE`. |
+| `bibliolivre/models.py` | `Livro`, `Membro` e `Emprestimo` como dataclasses imutáveis; `Emprestimo.ativo` deriva da data de devolução. |
+| `bibliolivre/errors.py` | Exceções de domínio `BiblioError`, `ValidacaoError`, `RegraNegocioError` e `NaoEncontradoError`. |
+| `tests/` | Testes unitários e de integração da CLI, regras de domínio, concorrência entre conexões SQLite e invariantes por simulação determinística. |
+
+### 8.2 Schema persistido
+
+- `livros(isbn TEXT PRIMARY KEY, titulo TEXT NOT NULL, autor TEXT NOT NULL, exemplares INTEGER NOT NULL CHECK >= 1)`.
+- `membros(id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT NOT NULL, email TEXT NOT NULL UNIQUE)`.
+- `emprestimos(id, isbn FK livros, membro_id FK membros, data_emprestimo, data_prevista, data_devolucao NULL, renovacoes DEFAULT 0, multa_centavos DEFAULT 0, multa_paga DEFAULT 0)`.
+- Datas são serializadas no formato ISO `AAAA-MM-DD`; valores monetários são centavos inteiros. `PRAGMA foreign_keys = ON` é habilitado em cada conexão.
+- RF-09 substitui nome e e-mail por identificadores de anonimização, preservando o histórico. O e-mail original fica livre. Se o endereço sentinela padrão já estiver ocupado, o repositório escolhe um sufixo numérico livre antes da atualização.
+
+### 8.3 API e execução
+
+A API de serviços é `Biblioteca`: `cadastrar_livro(isbn, titulo, autor, exemplares=1)`, `cadastrar_membro(nome, email)`, `emprestar(isbn, membro_id)`, `devolver(emprestimo_id)`, `renovar(emprestimo_id)`, `atrasados()`, `multa_pendente(membro_id)`, `pagar_multas(membro_id)`, `disponiveis(isbn)` e `anonimizar_membro(membro_id)`. A função pura `calcular_multa(prevista, devolucao)` retorna centavos.
+
+O comando instalado é `bibliolivre`; também é possível executar `python -m bibliolivre`. O arquivo padrão é `bibliolivre.db`; o caminho pode ser configurado por `BIBLIO_DB` ou pela opção global `--db`, posicionada antes do subcomando. Saídas: código 0 em sucesso, 1 em erro de domínio, 2 em erro de argumentos do `argparse` e 3 em falha SQLite capturada.
+
+O pacote não possui dependências de runtime. `coverage.py` e Ruff são dependências opcionais de desenvolvimento em `.[dev]`. O Docker Compose executa os testes na imagem `test` e mantém os dados da aplicação em volume nomeado `bibliolivre-dados`.
+
+### 8.4 Garantias e limites de validação
+
+`BEGIN IMMEDIATE` cobre a verificação e a gravação dentro da transação; a suíte contém disputa por um exemplar entre oito conexões independentes. Essa evidência não valida compartilhamento do arquivo em NAS, SMB/NFS nem operação entre computadores. A aplicação permanece uma CLI local, sem autenticação, reservas, interface web ou gestão multi-biblioteca.
+
+A cobertura é uma métrica de execução de linhas, não prova de ausência de defeitos. O limite configurado para o workflow é 95%; a porcentagem observada neste candidato não deve ser atribuída à release integrada. A confirmação final deve usar a execução de CI associada ao commit incorporado em `main`. O resultado local reproduzido e as URLs de Actions são registrados em `docs/TESTES.md`.

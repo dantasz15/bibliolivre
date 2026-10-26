@@ -4,15 +4,14 @@ services:
       context: .
       target: runtime
     volumes:
-      - ./dados:/dados
-    # uso: docker compose run --rm app livros
+      - bibliolivre-dados:/dados
+    # Uso: docker compose run --rm app livros
 
   test:
     build:
       context: .
-      target: base
-    volumes:
-      - ./tests:/app/tests:ro
-      - ./bibliolivre:/app/bibliolivre:ro
-    entrypoint: ["python", "-m", "unittest", "discover", "-s", "tests", "-t", ".", "-v"]
-    # uso: docker compose run --rm test
+      target: test
+    # Uso: docker compose run --build --rm test
+
+volumes:
+  bibliolivre-dados:

@@ -3,7 +3,6 @@ import argparse
 import os
 import sqlite3
 import sys
-from typing import List, Optional
 
 from .errors import BiblioError
 from .repository import Repositorio
@@ -51,7 +50,7 @@ def _parser() -> argparse.ArgumentParser:
     return p
 
 
-def main(argv: Optional[List[str]] = None, bib: Optional[Biblioteca] = None) -> int:
+def main(argv: list[str] | None = None, bib: Biblioteca | None = None) -> int:
     args = _parser().parse_args(argv)
     repo = None
     try:

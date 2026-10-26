@@ -29,6 +29,15 @@ class TestAnonimizacaoLGPD(unittest.TestCase):
         self.bib.anonimizar_membro(self.ana.id)
         self.bib.cadastrar_membro("Ana Souza", "ana@x.com")
 
+    def test_colisao_de_email_sentinela_nao_impede_anonimizacao(self):
+        email_reservado = f"anonimizado-{self.ana.id}@invalido.local"
+        outro = self.bib.cadastrar_membro("Outro membro", email_reservado)
+        anonimizado = self.bib.anonimizar_membro(self.ana.id)
+
+        self.assertNotEqual(anonimizado.email, email_reservado)
+        self.assertEqual(self.bib.repo.buscar_membro(outro.id).email, email_reservado)
+        self.assertTrue(anonimizado.email.startswith(f"anonimizado-{self.ana.id}-"))
+
     def test_bloqueia_com_emprestimo_ativo(self):
         self.bib.emprestar(ISBN_A, self.ana.id)
         with self.assertRaisesRegex(RegraNegocioError, "ativos"):
@@ -78,7 +87,7 @@ class TestTransacoes(unittest.TestCase):
                     sucessos.append(membro_id)
                 except RegraNegocioError:
                     recusas.append(membro_id)
-                except Exception as exc:  # noqa: BLE001 - registrar qualquer falha inesperada
+                except Exception as exc:  # registrar qualquer falha inesperada
                     outros.append(exc)
                 finally:
                     bib.repo.fechar()
