@@ -18,13 +18,13 @@ Após atualizar a documentação, a suíte foi executada novamente localmente na
 
 ## Validação oficial da candidata no GitHub Actions
 
-A validação remota mais recente observada para a candidata foi executada no head `c099ba18d7fb7ba1f9bb555cfe773a7ddb338d81` do PR #9. Em 25 de outubro de 2026, o evento `pull_request` terminou com sucesso:
+A validação remota mais recente observada para a candidata foi executada em 26 de outubro de 2026, no head `868d9b06b4ac657d5ace21855720a67448f2c43b` do PR #9. O evento `pull_request` terminou com sucesso:
 
 - [PR #9 — `release/1.0.0` → `main`](https://github.com/dantasz15/bibliolivre/pull/9).
-- [CI do PR — execução 40213447824](https://github.com/dantasz15/bibliolivre/actions/runs/40213447824): lint, testes Python 3.10–3.12 e harness/build Docker aprovados.
-- [CodeQL v4 — execução 40213447836](https://github.com/dantasz15/bibliolivre/actions/runs/40213447836): análise concluída com sucesso.
+- [CI do PR — execução 40413210956](https://github.com/dantasz15/bibliolivre/actions/runs/40413210956): lint, testes Python 3.10–3.12 e harness/build Docker aprovados.
+- [CodeQL v4 — execução 40413210532](https://github.com/dantasz15/bibliolivre/actions/runs/40413210532): análise concluída com sucesso.
 - O PR reportou 12 verificações bem-sucedidas, nenhuma falha e nenhuma pendência. Em cada versão Python, 47 testes passaram e 348/348 instruções tiveram cobertura de linhas (100%). O harness Docker executou os mesmos 47 testes e construiu a imagem runtime.
-- Os artefatos `coverage-python-3.10`, `coverage-python-3.11` e `coverage-python-3.12` foram publicados pelo workflow; consulte a execução de CI para baixá-los enquanto estiverem retidos.
+- Os artefatos `coverage-python-3.10`, `coverage-python-3.11` e `coverage-python-3.12` foram publicados pelo workflow; consulte a execução de CI para baixá-los durante o prazo de retenção do GitHub Actions.
 
 A primeira execução da matriz encontrou suporte TOML ausente do Coverage em Python 3.10. A dependência de desenvolvimento foi corrigida para `coverage[toml]`; os números acima pertencem à execução posterior aprovada.
 

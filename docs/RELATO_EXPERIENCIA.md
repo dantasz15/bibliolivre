@@ -29,7 +29,7 @@ Também foram corrigidas instruções de build Docker para usar volume nomeado e
 - Manter a SPEC explícita ajuda a rastrear as regras, mas o As-Built precisa ser conferido contra o código e a API efetivos.
 - Testes de regressão transformam um achado de revisão em uma proteção repetível.
 - Cobertura de 100% de linhas não é sinônimo de ausência de bugs: o caso de colisão só apareceu na auditoria de combinações de dados.
-- A CI validou 47 testes em cada versão Python 3.10–3.12, cobertura de 100% em 348 instruções, Docker e CodeQL v4 no PR #9; os resultados mais recentes consultados estão vinculados ao head candidato `c099ba1` e listados em `docs/TESTES.md`.
+- A CI validou 47 testes em cada versão Python 3.10–3.12, cobertura de 100% em 348 instruções, Docker e CodeQL v4 no PR #9; os resultados mais recentes consultados estão vinculados ao head candidato `868d9b0` e listados em `docs/TESTES.md`.
 - Revisão humana independente não pode ser substituída por IA ou pela aprovação dos testes.
 
 ## 6. Próximos passos para encerrar
