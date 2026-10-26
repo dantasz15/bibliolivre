@@ -12,6 +12,8 @@ O BiblioLivre controla acervo, membros, empréstimos, renovações, atrasos e mu
 
 > Projeto desenvolvido com **SDD (Spec-Driven Development)**: a especificação em [`docs/SPEC.md`](docs/SPEC.md) é a fonte da verdade; código e testes referenciam os IDs das regras (RF-xx / RN-xx).
 
+> **Entrega 3 — Entrega Final:** candidata à release no [PR #9](https://github.com/dantasz15/bibliolivre/pull/9). A CI e o CodeQL passaram, mas o PR ainda aguarda revisão humana independente; não há tag `v1.0.0` nem vídeo de demonstração publicado. O estado detalhado está em [`docs/GOVERNANCA.md`](docs/GOVERNANCA.md).
+
 ## Sumário
 - [Instalação e execução](#instalação-e-execução)
 - [Uso](#uso)

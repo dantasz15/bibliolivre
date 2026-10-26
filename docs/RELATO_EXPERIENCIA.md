@@ -16,7 +16,7 @@ Para esta preparação da release, as alterações estão isoladas em uma branch
 - `coverage.py` mediu 100% de cobertura de linhas nos módulos incluídos, totalizando 348 instruções executáveis nessa execução.
 - Ruff não encontrou problemas no código e nos testes.
 - O cenário `make demo` concluiu cadastro de livro e membro, empréstimo, renovação, devolução e anonimização.
-- O ambiente local não dispunha de Docker; no GitHub Actions, o harness Docker executou 47 testes e o build da imagem runtime passou no commit `fd8d14d`.
+- O ambiente local não dispunha de Docker; no GitHub Actions, o harness Docker executou 47 testes e o build da imagem runtime passou no head validado do PR #9 (`c099ba1`).
 
 ## 4. Desafios e correções
 
@@ -29,9 +29,9 @@ Também foram corrigidas instruções de build Docker para usar volume nomeado e
 - Manter a SPEC explícita ajuda a rastrear as regras, mas o As-Built precisa ser conferido contra o código e a API efetivos.
 - Testes de regressão transformam um achado de revisão em uma proteção repetível.
 - Cobertura de 100% de linhas não é sinônimo de ausência de bugs: o caso de colisão só apareceu na auditoria de combinações de dados.
-- A CI validou 47 testes em cada versão Python 3.10–3.12, cobertura de 100% em 348 instruções, Docker e CodeQL v4 no PR #9; os resultados são vinculados ao commit candidato `fd8d14d`.
+- A CI validou 47 testes em cada versão Python 3.10–3.12, cobertura de 100% em 348 instruções, Docker e CodeQL v4 no PR #9; os resultados mais recentes consultados estão vinculados ao head candidato `c099ba1` e listados em `docs/TESTES.md`.
 - Revisão humana independente não pode ser substituída por IA ou pela aprovação dos testes.
 
 ## 6. Próximos passos para encerrar
 
-Aguardar aprovação independente e incorporar o PR na `main`; só então publicar a tag/release `v1.0.0`, alterar a branch padrão para `main` se aprovado pelo mantenedor, gravar a demonstração de 3–5 minutos e anexar o link real ao PDF acadêmico. Não foram estimadas horas economizadas nem experiências de equipe porque não há registros que sustentem esses dados.
+A Entrega 3 é a Entrega Final acadêmica, mas a release técnica ainda é candidata: aguardar aprovação independente e incorporar o PR na `main`; só então publicar a tag/release `v1.0.0`, definir a branch padrão após a integração aprovada, gravar a demonstração de 3–5 minutos e anexar o link real ao PDF acadêmico. Não foram estimadas horas economizadas nem experiências de equipe porque não há registros que sustentem esses dados.

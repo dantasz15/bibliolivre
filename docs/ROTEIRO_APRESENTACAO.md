@@ -9,7 +9,7 @@
 | 1:00–2:10 | Executar o fluxo: cadastrar livro e membro, emprestar, verificar disponibilidade, renovar e devolver. | Terminal com `make demo` ou comandos do README. Usar apenas dados fictícios. |
 | 2:10–2:45 | Mostrar regras de negócio e privacidade, incluindo anonimização do membro e histórico preservado. | `docs/SPEC.md`, comando `membro-anonimizar` e teste da colisão do e-mail sentinela. |
 | 2:45–3:35 | Executar a suíte e explicar o que a evidência mede. | `make coverage`; mostrar total de testes e relatório de cobertura. Esclarecer que cobertura não prova ausência de bugs. |
-| 3:35–4:15 | Apresentar a versão e os limites da governança: release na `main`, CI, aprovação humana e ausência de revisão entre pares até existir aprovação real. | PR da release e status do GitHub Actions, após publicados. |
+| 3:35–4:15 | Apresentar a candidata final e os limites da governança: PR para `main`, CI aprovada, aprovação humana ainda pendente e tag/release ainda não publicada. | PR #9 e status do GitHub Actions. Atualizar este trecho depois do merge e da publicação da tag. |
 | 4:15–4:30 | Resumir um aprendizado: a auditoria detectou uma colisão de unicidade não coberta; foi corrigida e ganhou teste de regressão. | Teste `test_colisao_de_email_sentinela_nao_impede_anonimizacao`. |
 
 ## Antes de gravar

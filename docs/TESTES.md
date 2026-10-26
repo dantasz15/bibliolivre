@@ -1,45 +1,34 @@
 # Resultados dos Testes e Cobertura
 
-## Execução local da candidata à release
+## Execução local histórica
 
-Em 24 de outubro de 2026, foram executados os testes na branch de preparação `release/1.0.0`, em Python 3.12.3 e coverage.py 7.17.0:
+Em 24 de outubro de 2026, a suíte foi executada na branch de preparação `release/1.0.0`, com Python 3.12.3 e coverage.py 7.17.0. O log local registra 47 testes aprovados e 100% de cobertura de linhas em 348 instruções. Essa execução é histórica: o próprio log registra que a árvore de trabalho tinha alterações não commitadas. Ela não deve ser usada isoladamente como prova de uma release integrada.
 
-```text
-Ran 47 tests in 1.135s
-OK
+- [Log textual da execução local](evidencias/coverage-20261024T172458Z.txt)
+- [Relatório XML local](evidencias/coverage-20261024T172458Z.xml)
 
-Name                        Stmts   Miss  Cover
-bibliolivre/__init__.py         1      0   100%
-bibliolivre/cli.py             83      0   100%
-bibliolivre/errors.py           4      0   100%
-bibliolivre/models.py          27      0   100%
-bibliolivre/repository.py      90      0   100%
-bibliolivre/services.py       143      0   100%
-TOTAL                         348      0   100%
-```
+O lint Ruff passou e `make demo` executou o fluxo de cadastro, empréstimo, renovação, devolução e anonimização. O ambiente local não tinha Docker; a evidência Docker abaixo vem do GitHub Actions.
 
-- [Log textual completo da execução local](evidencias/coverage-20261024T172458Z.txt)
-- [Relatório de cobertura XML](evidencias/coverage-20261024T172458Z.xml)
-- O log registra o SHA base `369bbf1` e indica que a árvore continha alterações não commitadas durante essa medição. Ele é evidência local de uma medição anterior; a validação remota do commit versionado está registrada abaixo.
+## Reexecução local — 26 de outubro de 2026
 
-O lint Ruff (`ruff check bibliolivre tests`) passou e `make demo` executou o fluxo de cadastro, empréstimo, renovação, devolução e anonimização. Docker não estava instalado no ambiente local; por isso, nenhum resultado Docker local é declarado.
+Após atualizar a documentação, a suíte foi executada novamente localmente na branch `release/1.0.0`, no commit de referência `c099ba1`. As únicas alterações presentes na árvore eram documentais. Python 3.12.3 executou 47 testes sem falhas e mediu 100% de cobertura de linhas em 348 instruções; Ruff, `make demo` e `pip check` também passaram. A demonstração usou dados fictícios e o banco temporário foi removido ao final.
 
-## CI e validação da release
+- [Log completo local](evidencias/coverage-20261026T222747Z.txt)
+- [Relatório XML local](evidencias/coverage-20261026T222747Z.xml)
 
-O workflow [`.github/workflows/ci.yml`](../.github/workflows/ci.yml) está configurado para executar lint, testes/cobertura em Python 3.10, 3.11 e 3.12, além do harness e build Docker. [`.github/workflows/codeql.yml`](../.github/workflows/codeql.yml) configura análise CodeQL.
+## Validação oficial da candidata no GitHub Actions
 
-## Execução oficial do PR
-
-No commit `fd8d14d` (`fd8d14dc0ae63bafaf5af42cbacb5612b9699a95`), o evento `pull_request` concluiu com sucesso:
+A validação remota mais recente observada para a candidata foi executada no head `c099ba18d7fb7ba1f9bb555cfe773a7ddb338d81` do PR #9. Em 25 de outubro de 2026, o evento `pull_request` terminou com sucesso:
 
 - [PR #9 — `release/1.0.0` → `main`](https://github.com/dantasz15/bibliolivre/pull/9).
-- [CI do PR — execução 40212926287](https://github.com/dantasz15/bibliolivre/actions/runs/40212926287): lint, matriz Python 3.10–3.12 e Docker passaram.
-- [CodeQL v4 — execução 40212926292](https://github.com/dantasz15/bibliolivre/actions/runs/40212926292): análise concluída com sucesso.
-- A página do PR reportou 12 checks bem-sucedidos, 0 falhas e 0 pendências. Em cada versão Python, 47 testes passaram e 348/348 instruções tiveram cobertura (100%). O harness Docker também executou 47 testes e a imagem runtime foi construída.
-- As workflows usam checkout, setup-python e upload-artifact v7 e CodeQL Action v4, compatíveis com Node.js 24; os logs finais não registram os avisos de depreciação da execução anterior.
-- Artefatos `coverage-python-3.10`, `coverage-python-3.11` e `coverage-python-3.12` foram enviados ao Actions e ficam disponíveis até 24/11/2026. Para baixar: `gh run download 40212926287 --repo dantasz15/bibliolivre`.
+- [CI do PR — execução 40213447824](https://github.com/dantasz15/bibliolivre/actions/runs/40213447824): lint, testes Python 3.10–3.12 e harness/build Docker aprovados.
+- [CodeQL v4 — execução 40213447836](https://github.com/dantasz15/bibliolivre/actions/runs/40213447836): análise concluída com sucesso.
+- O PR reportou 12 verificações bem-sucedidas, nenhuma falha e nenhuma pendência. Em cada versão Python, 47 testes passaram e 348/348 instruções tiveram cobertura de linhas (100%). O harness Docker executou os mesmos 47 testes e construiu a imagem runtime.
+- Os artefatos `coverage-python-3.10`, `coverage-python-3.11` e `coverage-python-3.12` foram publicados pelo workflow; consulte a execução de CI para baixá-los enquanto estiverem retidos.
 
-A primeira execução da candidata identificou em Python 3.10 a ausência do suporte TOML do Coverage. A dependência foi corrigida para `coverage[toml]`; os resultados acima pertencem ao commit validado com essa correção e com as Actions atualizadas. O PR está pronto para revisão; a integração/release ainda depende de aprovação humana independente.
+A primeira execução da matriz encontrou suporte TOML ausente do Coverage em Python 3.10. A dependência de desenvolvimento foi corrigida para `coverage[toml]`; os números acima pertencem à execução posterior aprovada.
+
+**Limite importante:** o PR #9 continua aberto, sem aprovação independente e sem merge. Portanto, esses dados validam a candidata no PR; ainda não são evidência de uma tag ou release integrada em `main`. A cobertura mede linhas executadas e não prova ausência de defeitos.
 
 ## Comandos reproduzíveis
 
@@ -54,7 +43,7 @@ docker compose run --build --rm test
 docker build --target runtime -t bibliolivre:1.0.0 .
 ```
 
-`make coverage` executa a suíte e falha se a cobertura de linhas ficar abaixo de 95%. Os relatórios XML/textuais são criados em `docs/evidencias/`; o workflow também publica artefatos temporários por execução.
+`make coverage` falha se a cobertura de linhas ficar abaixo de 95%. Os relatórios textuais/XML são gerados em `docs/evidencias/`; o workflow também publica artefatos temporários por execução.
 
 ## Organização da suíte e rastreabilidade
 
@@ -66,4 +55,4 @@ docker build --target runtime -t bibliolivre:1.0.0 .
 | `tests/test_lgpd_concorrencia.py` | Anonimização, colisão de e-mail sentinela, rollback e oito conexões disputando um exemplar. |
 | `tests/test_propriedades.py` | Simulações determinísticas de invariantes e monotonicidade do cálculo da multa. |
 
-A cobertura de linhas mede execução de código, não prova que os requisitos estejam completos nem que não existam defeitos.
+A suíte combina testes de domínio e de integração local. Não há uma validação end-to-end de interface web: o escopo entregue é uma CLI offline para SQLite local.
