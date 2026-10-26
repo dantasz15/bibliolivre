@@ -8,7 +8,7 @@ O BiblioLivre substitui o registro manual de empréstimos em bibliotecas comunit
 
 O repositório identifica Gabriel Henrique Rodrigues Dantas como autor individual. O histórico público inicial contém um commit de estrutura e não registra divisão de tarefas entre integrantes, reuniões, Project Board, PRs de feature ou revisão por pares. Portanto, esta retrospectiva não atribui atividades a uma equipe nem declara reuniões ou processos que não estejam comprovados.
 
-Para esta preparação da release, as alterações estão isoladas em uma branch de release, com testes, documentação e CI propostos em conjunto. A proteção da `main` exige um PR e uma aprovação independente; até que essa revisão ocorra, a release não está incorporada à branch principal.
+O PR #9 da branch `release/1.0.0` foi integrado em `main` em 26/10/2026 e originou a release oficial `v1.0.0`. O autor revisou o próprio PR por se tratar de trabalho individual e autorizou configurar zero aprovações obrigatórias; a regra de Pull Request foi mantida. Não houve aprovação independente registrada, e isso é tratado como limite de governança, não como revisão por pares.
 
 ## 3. Resultados reproduzidos
 
@@ -29,9 +29,9 @@ Também foram corrigidas instruções de build Docker para usar volume nomeado e
 - Manter a SPEC explícita ajuda a rastrear as regras, mas o As-Built precisa ser conferido contra o código e a API efetivos.
 - Testes de regressão transformam um achado de revisão em uma proteção repetível.
 - Cobertura de 100% de linhas não é sinônimo de ausência de bugs: o caso de colisão só apareceu na auditoria de combinações de dados.
-- A CI validou 47 testes em cada versão Python 3.10–3.12, cobertura de 100% em 348 instruções, Docker e CodeQL v4 no PR #9; os resultados mais recentes consultados estão vinculados ao head candidato `868d9b0` e listados em `docs/TESTES.md`.
+- A CI validou 47 testes em cada versão Python 3.10–3.12, cobertura de 100% em 348 instruções, Docker e CodeQL v4 no PR #9; depois do merge, CI e CodeQL também passaram no commit `6df47b8` de `main`, conforme `docs/TESTES.md`.
 - Revisão humana independente não pode ser substituída por IA ou pela aprovação dos testes.
 
-## 6. Próximos passos para encerrar
+## 6. Etapa acadêmica remanescente
 
-A Entrega 3 é a Entrega Final acadêmica, mas a release técnica ainda é candidata: aguardar aprovação independente e incorporar o PR na `main`; só então publicar a tag/release `v1.0.0`, definir a branch padrão após a integração aprovada, gravar a demonstração de 3–5 minutos e anexar o link real ao PDF acadêmico. Não foram estimadas horas economizadas nem experiências de equipe porque não há registros que sustentem esses dados.
+A release técnica `v1.0.0` está publicada e a branch padrão é `main`. Para concluir a submissão acadêmica, falta gravar e publicar a demonstração funcional de 3–5 minutos e acrescentar ao PDF o link verificável quando disponível. Não foram estimadas horas economizadas nem experiências de equipe porque não há registros que sustentem esses dados.

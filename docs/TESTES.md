@@ -16,19 +16,21 @@ Após atualizar a documentação, a suíte foi executada novamente localmente na
 - [Log completo local](evidencias/coverage-20261026T222747Z.txt)
 - [Relatório XML local](evidencias/coverage-20261026T222747Z.xml)
 
-## Validação oficial da candidata no GitHub Actions
+## Validação oficial da release no GitHub Actions
 
-A validação remota mais recente observada para a candidata foi executada em 26 de outubro de 2026, no head `868d9b06b4ac657d5ace21855720a67448f2c43b` do PR #9. O evento `pull_request` terminou com sucesso:
+A matriz final do PR #9 foi executada em 26 de outubro de 2026 no head `e9771d6` e terminou com 12 verificações aprovadas, sem falhas ou pendências. Depois da integração, CI e CodeQL foram executados novamente no commit `6df47b8453967c3326b9dba40e780477a8452077` de `main`; ambos concluíram com sucesso.
 
-- [PR #9 — `release/1.0.0` → `main`](https://github.com/dantasz15/bibliolivre/pull/9).
-- [CI do PR — execução 40413210956](https://github.com/dantasz15/bibliolivre/actions/runs/40413210956): lint, testes Python 3.10–3.12 e harness/build Docker aprovados.
-- [CodeQL v4 — execução 40413210532](https://github.com/dantasz15/bibliolivre/actions/runs/40413210532): análise concluída com sucesso.
-- O PR reportou 12 verificações bem-sucedidas, nenhuma falha e nenhuma pendência. Em cada versão Python, 47 testes passaram e 348/348 instruções tiveram cobertura de linhas (100%). O harness Docker executou os mesmos 47 testes e construiu a imagem runtime.
-- Os artefatos `coverage-python-3.10`, `coverage-python-3.11` e `coverage-python-3.12` foram publicados pelo workflow; consulte a execução de CI para baixá-los durante o prazo de retenção do GitHub Actions.
+- [PR #9 — `release/1.0.0` → `main`, integrado](https://github.com/dantasz15/bibliolivre/pull/9).
+- [CI pós-merge — execução 40414632362](https://github.com/dantasz15/bibliolivre/actions/runs/40414632362): execução no commit integrado `6df47b8`, concluída com sucesso.
+- [CodeQL pós-merge — execução 40414632359](https://github.com/dantasz15/bibliolivre/actions/runs/40414632359): análise no commit integrado, concluída com sucesso.
+- [CI do PR — execução 40413951139](https://github.com/dantasz15/bibliolivre/actions/runs/40413951139) e [CodeQL do PR — execução 40413951136](https://github.com/dantasz15/bibliolivre/actions/runs/40413951136): lint, testes Python 3.10–3.12, harness/build Docker e análise de segurança aprovados no head `e9771d6`.
+- Em cada versão Python, 47 testes passaram e 348/348 instruções tiveram cobertura de linhas (100%). O harness Docker executou os mesmos 47 testes e construiu a imagem runtime.
+- Os artefatos `coverage-python-3.10`, `coverage-python-3.11` e `coverage-python-3.12` foram publicados pelo workflow do PR e permanecem sujeitos ao prazo de retenção do GitHub Actions.
+- [Release oficial `v1.0.0`](https://github.com/dantasz15/bibliolivre/releases/tag/v1.0.0), publicada a partir de `main` no commit de merge.
 
-A primeira execução da matriz encontrou suporte TOML ausente do Coverage em Python 3.10. A dependência de desenvolvimento foi corrigida para `coverage[toml]`; os números acima pertencem à execução posterior aprovada.
+A primeira execução da matriz encontrou suporte TOML ausente do Coverage em Python 3.10. A dependência de desenvolvimento foi corrigida para `coverage[toml]`; os números acima pertencem às execuções posteriores aprovadas. A cobertura mede linhas executadas e não prova ausência de defeitos.
 
-**Limite importante:** o PR #9 continua aberto, sem aprovação independente e sem merge. Portanto, esses dados validam a candidata no PR; ainda não são evidência de uma tag ou release integrada em `main`. A cobertura mede linhas executadas e não prova ausência de defeitos.
+**Governança:** o PR #9 foi revisado pelo autor por se tratar de trabalho individual. Não houve aprovação independente registrada; por autorização expressa, a regra de proteção exige PR, mas o número de aprovações obrigatórias está configurado como zero. Os checks aprovados são evidência automatizada, não revisão por pares.
 
 ## Comandos reproduzíveis
 
