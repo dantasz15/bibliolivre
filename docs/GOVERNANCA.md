@@ -3,31 +3,33 @@
 ## Estado verificado no GitHub — 26 de outubro de 2026
 
 - Repositório: [`dantasz15/bibliolivre`](https://github.com/dantasz15/bibliolivre).
-- Branch padrão atual: `devevop`. A branch `main` existe, mas ainda não é a branch padrão.
-- `main` está protegida e exige Pull Request e uma aprovação. Push forçado e exclusão estão desabilitados. Em 26/10/2026, a aplicação da regra a administradores foi ativada (`enforce_admins=true`). A configuração ainda não lista checks obrigatórios (`required_status_checks=null`). Assim, os workflows verdes são evidência de validação, mas a regra de proteção consultada não os exige para permitir merge.
-- `main` aponta para `369bbf10eb5b7e0af0c23aa61459afc0e160dda0`. A branch `release/1.0.0` aponta para `868d9b06b4ac657d5ace21855720a67448f2c43b`.
-- O [PR #9](https://github.com/dantasz15/bibliolivre/pull/9), de `release/1.0.0` para `main`, está aberto e pronto para revisão. O estado é `REVIEW_REQUIRED`/`BLOCKED`, não há revisor solicitado e o PR não foi integrado.
-- Não há tags Git nem releases publicadas no repositório. A tag `v1.0.0` ainda não existe.
-- O histórico inicial identifica o trabalho como individual; não há evidência de divisão de tarefas, reuniões, Project Board ou revisão por pares nas etapas anteriores.
+- A branch padrão é `main`. Ela contém a Entrega Final integrada pelo [PR #9](https://github.com/dantasz15/bibliolivre/pull/9), fechado como merged em 26/10/2026.
+- A regra de proteção de `main` exige Pull Request e se aplica também a administradores. O número de aprovações obrigatórias foi alterado para zero, por decisão expressa do autor em razão do trabalho individual. Push forçado e exclusão da branch permanecem desabilitados. A regra não configura checks de status obrigatórios; por isso, os checks verdes foram confirmados como evidência, mas não são condição automatizada da proteção.
+- O PR #9 foi revisado pelo próprio autor, conforme a declaração de trabalho individual. Não houve aprovação independente registrada. Essa limitação não é apresentada como revisão por pares.
+- O commit de merge em `main` é `6df47b8453967c3326b9dba40e780477a8452077`. Não havia Pull Requests abertos na verificação após a integração.
+- A tag [`v1.0.0`](https://github.com/dantasz15/bibliolivre/releases/tag/v1.0.0) e a Release oficial foram publicadas a partir de `main`, apontando para o commit de merge `6df47b8`.
+- O roteiro funcional está em [`ROTEIRO_APRESENTACAO.md`](ROTEIRO_APRESENTACAO.md). Até esta verificação, não havia link público informado para um vídeo gravado; não se apresenta o roteiro como gravação concluída.
 
-## Validação automatizada da candidata
+## Validação automatizada da release
 
-No head `868d9b06b4ac657d5ace21855720a67448f2c43b`, a página do PR reportou 12 checks aprovados, sem falhas ou pendências. A CI executou lint, 47 testes em Python 3.10, 3.11 e 3.12, cobertura de 100% em 348 instruções e o harness/build Docker. A análise CodeQL v4 também passou. Links para os runs e detalhes estão em [`docs/TESTES.md`](TESTES.md).
+No head `e9771d6` do PR #9, a matriz de CI e o CodeQL concluíram com sucesso, totalizando 12 verificações aprovadas. A suíte passou com 47 testes em cada versão Python 3.10, 3.11 e 3.12 e 100% de cobertura de linhas em 348 instruções; o harness Docker também passou e a imagem runtime foi construída. Depois do merge, os workflows de CI e CodeQL foram executados novamente no commit `6df47b8` de `main` e terminaram com sucesso.
 
-Checks aprovados não substituem a aprovação humana exigida pela regra do PR, não incorporam automaticamente o código e não criam uma tag/release.
+- [CI no commit integrado — execução 40414632362](https://github.com/dantasz15/bibliolivre/actions/runs/40414632362).
+- [CodeQL no commit integrado — execução 40414632359](https://github.com/dantasz15/bibliolivre/actions/runs/40414632359).
+- Runs anteriores do PR e detalhes dos artefatos de cobertura estão em [`docs/TESTES.md`](TESTES.md), sujeitos ao prazo de retenção do GitHub Actions.
 
-## Fluxo de contribuição
+A aprovação dos checks atesta somente as verificações automatizadas executadas. Ela não constitui aprovação independente nem prova ausência de defeitos.
+
+## Fluxo para mudanças futuras
 
 1. Criar uma branch a partir de `main` atualizada.
 2. Relacionar mudanças funcionais à SPEC e a testes; mudanças de comportamento precisam de teste de regressão.
 3. Executar `make lint`, `make coverage` e o harness Docker.
 4. Abrir Pull Request para `main` com resumo e evidências reproduzíveis.
-5. Aguardar checks verdes e aprovação de uma pessoa diferente do autor.
-6. Corrigir comentários e integrar pelo fluxo aprovado no GitHub, sem contornar a proteção.
-7. Depois do merge, publicar a tag/release e verificar se não restaram PRs de release abertos.
+5. Aguardar CI e CodeQL verdes. Uma revisão independente continua sendo recomendada para mudanças futuras, ainda que o número obrigatório de aprovações esteja configurado como zero.
+6. Corrigir comentários e integrar pelo fluxo de Pull Request; não usar push direto para contornar a proteção.
+7. Para mudanças posteriores à versão 1.0.0, seguir o versionamento SemVer e publicar uma nova release quando houver alteração de produto que a justifique.
 
-A exigência de revisão independente não será contornada por push direto, aprovação simulada por IA ou mudança de proteção feita para liberar este PR.
+## Encerramento da Entrega Final
 
-## Pendências para a Entrega Final
-
-Para declarar a release final concluída, ainda é necessário obter revisão independente do PR #9, integrá-lo em `main`, criar e publicar `v1.0.0`, confirmar a versão final na branch padrão e gravar/publicar a demonstração funcional de 3–5 minutos. Depois, atualizar o PDF e esta documentação com os links definitivos. Até lá, o estado correto é **candidata à release**, não release concluída.
+O código foi integrado em `main`, a branch padrão foi alinhada para `main`, a proteção com exigência de Pull Request foi mantida, não há PR de release aberto e a release `v1.0.0` está publicada. Permanece como etapa acadêmica a gravação e publicação de uma demonstração funcional de 3–5 minutos, com atualização do PDF e inclusão do link verificável quando disponível.

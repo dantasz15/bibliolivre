@@ -1,21 +1,24 @@
-# Encerramento da Entrega 3
+# Encerramento da Entrega 3 — Entrega Final
 
-Este guia distingue validações locais das etapas que dependem do GitHub e da gravação pelo estudante.
+Este guia registra o estado de encerramento do BiblioLivre e separa validações automáticas das etapas que dependem de demonstração humana.
 
-## 1. Verificação local
+## 1. Verificação técnica
 
-No clone do projeto, crie ambiente virtual e instale `.[dev]`. Execute `make lint` e `make coverage`; se houver Docker, execute `docker compose run --build --rm test` e construa a imagem runtime. Registre versões, commit e resultados. Não use dados pessoais reais na demonstração.
+A release foi validada com `make lint`, cobertura e harness Docker. A matriz de CI executou os testes em Python 3.10, 3.11 e 3.12; CodeQL também concluiu com sucesso. A evidência local e os links oficiais estão em [`TESTES.md`](TESTES.md). As demonstrações devem usar apenas dados fictícios.
 
-## 2. Pull Request e revisão humana
+## 2. Pull Request e governança
 
-A branch `main` exige Pull Request e uma aprovação independente. Envie a branch `release/1.0.0` para revisão; aguarde CI/CodeQL e a aprovação de uma pessoa real. O autor não deve aprovar o próprio PR. Não altere a proteção nem fabrique comentários para contornar esse requisito.
+O PR #9, da branch `release/1.0.0` para `main`, foi revisado pelo próprio autor e integrado em 26/10/2026. Como o projeto é individual, o autor autorizou reduzir a zero o número de aprovações obrigatórias; a regra de Pull Request em `main` foi mantida. Não houve aprovação independente registrada. Os checks verdes demonstram validação automatizada, não revisão por pares.
 
 ## 3. Release versionada
 
-Depois que a aprovação e os checks forem concluídos, incorpore o PR em `main`, confirme o commit final, crie a tag `v1.0.0` e publique a Release com notas correspondentes ao `CHANGELOG.md`. Confirme que a página da tag/release aponta para o commit incorporado e que não ficou PR de release aberto. Atualize README, governança e PDF com URLs reais.
+A branch padrão do repositório é `main`. O PR #9 foi integrado no commit `6df47b8453967c3326b9dba40e780477a8452077`; a tag `v1.0.0` e a Release oficial foram publicadas apontando para esse commit. Os workflows de CI e CodeQL também passaram no commit integrado. Na verificação posterior, não havia PR aberto.
+
+- [Release oficial BiblioLivre 1.0.0](https://github.com/dantasz15/bibliolivre/releases/tag/v1.0.0)
+- [Pull Request #9 integrado](https://github.com/dantasz15/bibliolivre/pull/9)
 
 ## 4. Vídeo e PDF
 
-Grave uma demonstração de 3–5 minutos usando o roteiro em `docs/ROTEIRO_APRESENTACAO.md`. Publique o arquivo em um serviço autorizado, teste que o link funciona e inclua-o no PDF. Até a gravação existir, não apresente este roteiro como vídeo entregue nem invente URL.
+O roteiro para uma demonstração funcional de 3–5 minutos está em [`ROTEIRO_APRESENTACAO.md`](ROTEIRO_APRESENTACAO.md). A gravação e publicação do vídeo permanecem pendentes até haver arquivo e URL verificável; este guia não substitui a gravação. Quando o link estiver disponível, atualize o PDF de submissão e este documento, usando dados fictícios e sem expor RA, credenciais ou dados pessoais reais.
 
-O PDF acadêmico deve informar nome e RA somente na cópia destinada à instituição; evite publicar o RA no repositório público. Inclua link da release, log de testes/cobertura, resultado de CI, link do vídeo e limitações relevantes.
+O PDF acadêmico deve informar nome e RA somente na cópia destinada à instituição; evite publicar o RA no repositório público. Inclua os links da release, dos resultados de teste/CI e, quando disponível, do vídeo, além das limitações técnicas relevantes.

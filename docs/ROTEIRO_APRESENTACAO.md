@@ -1,6 +1,6 @@
 # Roteiro da Demonstração Funcional — 3 a 5 minutos
 
-**Status:** roteiro preparado. A gravação e o envio para YouTube, Drive, Loom ou SharePoint ainda precisam ser feitos pelo estudante/equipe. Este arquivo não representa um vídeo gravado nem contém link fictício.
+**Status:** roteiro preparado para a Entrega Final publicada. A gravação e o envio para YouTube, Drive, Loom ou SharePoint ainda precisam ser feitos pelo estudante. Este arquivo não representa um vídeo gravado nem contém link fictício.
 
 | Tempo | O que narrar | O que mostrar |
 |---|---|---|
@@ -9,7 +9,7 @@
 | 1:00–2:10 | Executar o fluxo: cadastrar livro e membro, emprestar, verificar disponibilidade, renovar e devolver. | Terminal com `make demo` ou comandos do README. Usar apenas dados fictícios. |
 | 2:10–2:45 | Mostrar regras de negócio e privacidade, incluindo anonimização do membro e histórico preservado. | `docs/SPEC.md`, comando `membro-anonimizar` e teste da colisão do e-mail sentinela. |
 | 2:45–3:35 | Executar a suíte e explicar o que a evidência mede. | `make coverage`; mostrar total de testes e relatório de cobertura. Esclarecer que cobertura não prova ausência de bugs. |
-| 3:35–4:15 | Apresentar a candidata final e os limites da governança: PR para `main`, CI aprovada, aprovação humana ainda pendente e tag/release ainda não publicada. | PR #9 e status do GitHub Actions. Atualizar este trecho depois do merge e da publicação da tag. |
+| 3:35–4:15 | Apresentar a release oficial `v1.0.0`, integrada em `main` e validada por CI/CodeQL. Explicar que o trabalho é individual: houve revisão pelo autor, mas não aprovação independente; a exigência de aprovações foi configurada como zero, mantendo-se a exigência de PR. | PR #9, branch `main`, tag/release `v1.0.0` e status das execuções no GitHub Actions. |
 | 4:15–4:30 | Resumir um aprendizado: a auditoria detectou uma colisão de unicidade não coberta; foi corrigida e ganhou teste de regressão. | Teste `test_colisao_de_email_sentinela_nao_impede_anonimizacao`. |
 
 ## Antes de gravar
@@ -26,4 +26,4 @@
 - **Como a aplicação trata multas?** R$ 0,50 por dia de atraso, com teto de R$ 20,00 por empréstimo; valores são armazenados em centavos.
 - **O que acontece com concorrência?** A operação de empréstimo usa `BEGIN IMMEDIATE`; há teste com oito conexões independentes disputando um exemplar. Isso não comprova suporte em filesystem de rede.
 - **100% de cobertura garante ausência de erros?** Não; é a proporção de linhas executadas na suíte, não prova que todos os requisitos e casos de uso estão corretos.
-- **Quem homologa uma alteração?** Testes e CI são evidências automatizadas; a aprovação independente de uma pessoa real continua sendo necessária para integrar a release na `main`.
+- **Quem homologou esta release?** O autor fez a revisão por se tratar de trabalho individual; não houve aprovação independente registrada. Testes e CI são evidências automatizadas e não equivalem a revisão por pares. A regra de `main` continua exigindo PR.

@@ -2,7 +2,7 @@
 
 Formato inspirado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e [SemVer](https://semver.org/lang/pt-BR/).
 
-## [1.0.0] — Entrega 3 / Entrega Final, candidata à release (publicação pendente)
+## [1.0.0] — Entrega 3 / Entrega Final — publicada em 26/10/2026
 
 ### Adicionado
 - Pipeline de CI com lint, testes e cobertura em Python 3.10–3.12, harness Docker e artefatos de cobertura.
@@ -23,9 +23,10 @@ Formato inspirado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/)
 - 47 testes aprovados; 100% de cobertura de linhas em 348 instruções executáveis; Ruff aprovado.
 
 ### Validação remota
-- CI, matriz Python 3.10–3.12, harness Docker e CodeQL v4 passaram no [PR #9](https://github.com/dantasz15/bibliolivre/pull/9), head `868d9b0`; consulte a [execução de CI 40413210956](https://github.com/dantasz15/bibliolivre/actions/runs/40413210956) e a [execução CodeQL 40413210532](https://github.com/dantasz15/bibliolivre/actions/runs/40413210532). A página do PR reportou 12 verificações concluídas sem falhas.
+- A matriz de CI, o harness Docker e o CodeQL v4 passaram no [PR #9](https://github.com/dantasz15/bibliolivre/pull/9), head `e9771d6`; a execução final reportou 12 verificações aprovadas.
+- Após o merge, [CI 40414632362](https://github.com/dantasz15/bibliolivre/actions/runs/40414632362) e [CodeQL 40414632359](https://github.com/dantasz15/bibliolivre/actions/runs/40414632359) concluíram com sucesso no commit integrado `6df47b8` de `main`.
 - Os workflows com Actions v7 e Node.js 24 passaram sem avisos de depreciação no run final.
-- A tag `v1.0.0` ainda não foi publicada: o PR aguarda aprovação independente e a demonstração em vídeo ainda precisa ser gravada.
+- A tag [`v1.0.0`](https://github.com/dantasz15/bibliolivre/releases/tag/v1.0.0) e a Release oficial foram publicadas a partir de `main`. O vídeo demonstrativo ainda depende de gravação/publicação pelo autor.
 
 ## Histórico acadêmico anterior (não são releases SemVer publicadas)
 

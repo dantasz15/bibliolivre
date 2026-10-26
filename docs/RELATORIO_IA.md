@@ -26,7 +26,7 @@ A origem e a licença de código incorporado devem ser verificadas. A presença 
 
 A SPEC registra o comportamento esperado; os testes verificam apenas os cenários codificados. Mesmo 100% de cobertura de linhas não prova que todos os requisitos estejam corretos, completos ou bem interpretados. A homologação requer leitura da especificação e do diff, execução dos testes e confirmação de que os fluxos atendem ao problema real.
 
-O trabalho está documentado como individual. O histórico inicial do GitHub não comprova revisão por pares; a branch `main` está protegida e requer uma aprovação independente para incorporar este PR de release. Essa aprovação deve vir de uma pessoa real, não do agente de IA nem do autor do PR.
+O trabalho está documentado como individual. O PR #9 foi revisado pelo próprio autor e integrado após a exigência de aprovações obrigatórias ser configurada como zero, mantendo-se a exigência de Pull Request na branch `main`. Não houve aprovação independente registrada; os testes e as execuções de CI/CodeQL não são apresentados como revisão por pares. Para mudanças futuras, revisão humana independente continua sendo uma prática recomendada.
 
 ## 6. Conclusão
 

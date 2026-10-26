@@ -1,4 +1,4 @@
-# Especificação Técnica — BiblioLivre (v1.3 As-Built, candidata à release 1.0.0)
+# Especificação Técnica — BiblioLivre (v1.3 As-Built da release 1.0.0)
 
 ## Histórico de versões
 | Versão | Entrega | Mudanças |
@@ -7,7 +7,7 @@
 | v1.0 | E1 (final) | Adicionada RN-04 (mesmo título), RN-08 (disponibilidade); ISBN passa a exigir dígito verificador; contratos de E/S (seção 5) |
 | v1.1 | E2 | Loop de re-especificação RE-01..RE-04 (ver `ERROS_E_RE_ESPECIFICACAO.md`) |
 | v1.2 | E2 | RE-05: RF-09 (LGPD) e RNF-07 (atomicidade/concorrência) |
-| v1.3 | E3 — Entrega Final (As-Built) | Conferência dos requisitos, API, schema e componentes contra o código candidato à release 1.0.0; precisão do escopo de concorrência e correção da colisão do e-mail sentinela |
+| v1.3 | E3 — Entrega Final (As-Built) | Conferência dos requisitos, API, schema e componentes contra o código da release 1.0.0; precisão do escopo de concorrência e correção da colisão do e-mail sentinela |
 
 > Histórico: v1.0 (Entrega 1) → v1.1/v1.2 (refinamentos da Entrega 2 descritos em `ERROS_E_RE_ESPECIFICACAO.md`) → v1.3 (As-Built da Entrega 3 — Entrega Final). Este registro descreve evolução documental; não representa revisão de grupo nem validação de usuário externo.
 
@@ -113,9 +113,9 @@ flowchart LR
 | RNF-07 | **Operações de escrita atômicas e seguras para conexões simultâneas ao mesmo arquivo SQLite local, usando `BEGIN IMMEDIATE` [RE-05]** |
 | RNF-08 | Cobertura de testes ≥ 95% das linhas, verificada no CI |
 
-## 8. As-Built do candidato à release 1.0.0
+## 8. As-Built da release 1.0.0
 
-Esta seção descreve a implementação efetiva do código deste repositório. A tag oficial de release somente será considerada entregue depois que o PR de release for revisado e incorporado à branch `main`.
+Esta seção descreve a implementação efetiva do código da tag oficial `v1.0.0`. O PR #9 foi integrado à branch `main` em 26/10/2026; a tag e a release apontam para o commit de merge `6df47b8`.
 
 ### 8.1 Componentes e responsabilidades
 
@@ -148,4 +148,4 @@ O pacote não possui dependências de runtime. `coverage.py` e Ruff são depend�
 
 `BEGIN IMMEDIATE` cobre a verificação e a gravação dentro da transação; a suíte contém disputa por um exemplar entre oito conexões independentes. Essa evidência não valida compartilhamento do arquivo em NAS, SMB/NFS nem operação entre computadores. A aplicação permanece uma CLI local, sem autenticação, reservas, interface web ou gestão multi-biblioteca.
 
-A cobertura é uma métrica de execução de linhas, não prova de ausência de defeitos. O limite configurado para o workflow é 95%; a porcentagem observada neste candidato não deve ser atribuída à release integrada. A confirmação final deve usar a execução de CI associada ao commit incorporado em `main`. O resultado local reproduzido e as URLs de Actions são registrados em `docs/TESTES.md`.
+A cobertura é uma métrica de execução de linhas, não prova de ausência de defeitos. O limite configurado para o workflow é 95%. A matriz de CI da candidata foi aprovada antes do merge e as execuções CI/CodeQL do commit integrado `6df47b8` também concluíram com sucesso; os resultados e links estão registrados em `docs/TESTES.md`.
