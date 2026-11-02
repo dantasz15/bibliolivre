@@ -32,6 +32,9 @@ Também foram corrigidas instruções de build Docker para usar volume nomeado e
 - A CI validou 47 testes em cada versão Python 3.10–3.12, cobertura de 100% em 348 instruções, Docker e CodeQL v4 no PR #9; depois do merge, CI e CodeQL também passaram no commit `6df47b8` de `main`, conforme `docs/TESTES.md`.
 - Revisão humana independente não pode ser substituída por IA ou pela aprovação dos testes.
 
-## 6. Etapa acadêmica remanescente
+## 6. Demonstração e encerramento da entrega
 
-A release técnica `v1.0.0` está publicada e a branch padrão é `main`. Para concluir a submissão acadêmica, falta gravar e publicar a demonstração funcional de 3–5 minutos e acrescentar ao PDF o link verificável quando disponível. Não foram estimadas horas economizadas nem experiências de equipe porque não há registros que sustentem esses dados.
+A demonstração funcional final tem 3min44s, foi publicada como asset da release `v1.0.0` e o relatório de submissão recebeu o link direto verificável. O vídeo combina motion graphics e narração com resultados reais da CLI executada em banco temporário e usando dados fictícios; não é uma captura contínua de tela. As etapas de solução final, testes, As-Built, release, demonstração e vínculo no PDF estão concluídas. Não foram estimadas horas economizadas nem experiências de equipe porque não há registros que sustentem esses dados.
+
+- [Vídeo de demonstração — MP4](https://github.com/dantasz15/bibliolivre/releases/download/v1.0.0/BiblioLivre_Demonstracao_Final.mp4)
+- [Release oficial `v1.0.0`](https://github.com/dantasz15/bibliolivre/releases/tag/v1.0.0)
