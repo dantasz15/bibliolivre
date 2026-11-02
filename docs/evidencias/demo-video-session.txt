@@ -1,0 +1,29 @@
+$ python3 -m bibliolivre --db demo.sqlite3 livro-add 9788535914849 O\ Pequeno\ Príncipe Antoine\ de\ Saint-Exupéry --exemplares 2
+Livro cadastrado: O Pequeno Príncipe (9788535914849) x2
+
+$ python3 -m bibliolivre --db demo.sqlite3 membro-add Lia\ Martins lia.martins@example.test
+Membro #1 cadastrado: Lia Martins
+
+$ python3 -m bibliolivre --db demo.sqlite3 livros
+9788535914849 | O Pequeno Príncipe | Antoine de Saint-Exupéry | disponíveis: 2/2
+
+$ python3 -m bibliolivre --db demo.sqlite3 emprestar 9788535914849 1
+Empréstimo #1 registrado. Devolver até 16/11/2026
+
+$ python3 -m bibliolivre --db demo.sqlite3 livros
+9788535914849 | O Pequeno Príncipe | Antoine de Saint-Exupéry | disponíveis: 1/2
+
+$ python3 -m bibliolivre --db demo.sqlite3 renovar 1
+Empréstimo #1 renovado até 23/11/2026
+
+$ python3 -m bibliolivre --db demo.sqlite3 atrasados
+Nenhum empréstimo em atraso.
+
+$ python3 -m bibliolivre --db demo.sqlite3 devolver 1
+Empréstimo #1 devolvido.
+
+$ python3 -m bibliolivre --db demo.sqlite3 multa 1
+Multa pendente: R$ 0,00
+
+$ python3 -m bibliolivre --db demo.sqlite3 membro-anonimizar 1
+Dados pessoais removidos: Membro anonimizado #1

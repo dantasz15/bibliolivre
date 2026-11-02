@@ -1,6 +1,6 @@
 # Governança do Repositório
 
-## Estado verificado no GitHub — 26 de outubro de 2026
+## Estado verificado no GitHub — 1º de novembro de 2026
 
 - Repositório: [`dantasz15/bibliolivre`](https://github.com/dantasz15/bibliolivre).
 - A branch padrão é `main`. Ela contém a Entrega Final integrada pelo [PR #9](https://github.com/dantasz15/bibliolivre/pull/9), fechado como merged em 26/10/2026.
@@ -8,7 +8,7 @@
 - O PR #9 foi revisado pelo próprio autor, conforme a declaração de trabalho individual. Não houve aprovação independente registrada. Essa limitação não é apresentada como revisão por pares.
 - O commit de merge em `main` é `6df47b8453967c3326b9dba40e780477a8452077`. Não havia Pull Requests abertos na verificação após a integração.
 - A tag [`v1.0.0`](https://github.com/dantasz15/bibliolivre/releases/tag/v1.0.0) e a Release oficial foram publicadas a partir de `main`, apontando para o commit de merge `6df47b8`.
-- O roteiro funcional está em [`ROTEIRO_APRESENTACAO.md`](ROTEIRO_APRESENTACAO.md). Até esta verificação, não havia link público informado para um vídeo gravado; não se apresenta o roteiro como gravação concluída.
+- A demonstração funcional de 3min44s foi publicada como asset da release [`v1.0.0`](https://github.com/dantasz15/bibliolivre/releases/tag/v1.0.0): [baixar MP4](https://github.com/dantasz15/bibliolivre/releases/download/v1.0.0/BiblioLivre_Demonstracao_Final.mp4). Ela usa motion graphics e narração; comandos e saídas correspondem a execução real em SQLite temporário com dados fictícios, não a uma captura contínua de tela. O roteiro e as ressalvas de interpretação estão em [`ROTEIRO_APRESENTACAO.md`](ROTEIRO_APRESENTACAO.md).
 
 ## Validação automatizada da release
 
@@ -32,4 +32,4 @@ A aprovação dos checks atesta somente as verificações automatizadas executad
 
 ## Encerramento da Entrega Final
 
-O código foi integrado em `main`, a branch padrão foi alinhada para `main`, a proteção com exigência de Pull Request foi mantida, não há PR de release aberto e a release `v1.0.0` está publicada. Permanece como etapa acadêmica a gravação e publicação de uma demonstração funcional de 3–5 minutos, com atualização do PDF e inclusão do link verificável quando disponível.
+O código foi integrado em `main`, a branch padrão foi alinhada para `main`, a proteção com exigência de Pull Request foi mantida e a release `v1.0.0` está publicada. A demonstração funcional de 3min44s foi anexada à release, e o relatório acadêmico foi atualizado com o link direto. A checagem de encerramento registra as entregas técnicas e acadêmicas concluídas; a ausência de aprovação independente segue descrita como limite de governança, não como revisão por pares.

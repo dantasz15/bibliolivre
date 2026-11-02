@@ -12,7 +12,7 @@ O BiblioLivre controla acervo, membros, empréstimos, renovações, atrasos e mu
 
 > Projeto desenvolvido com **SDD (Spec-Driven Development)**: a especificação em [`docs/SPEC.md`](docs/SPEC.md) é a fonte da verdade; código e testes referenciam os IDs das regras (RF-xx / RN-xx).
 
-> **Entrega 3 — Entrega Final:** release oficial [`v1.0.0`](https://github.com/dantasz15/bibliolivre/releases/tag/v1.0.0), publicada a partir de `main`; o PR #9 foi integrado e `main` é a branch padrão. CI e CodeQL passaram no commit de release. O trabalho é individual: não houve aprovação independente registrada e o número de aprovações obrigatórias foi configurado como zero; a regra continua exigindo PR. A gravação/publicação do vídeo demonstrativo permanece pendente. Consulte [`docs/GOVERNANCA.md`](docs/GOVERNANCA.md) para o estado detalhado.
+> **Entrega 3 — Entrega Final:** release oficial [`v1.0.0`](https://github.com/dantasz15/bibliolivre/releases/tag/v1.0.0), publicada a partir de `main`; o PR #9 foi integrado e `main` é a branch padrão. CI e CodeQL passaram no commit de release. O trabalho é individual: não houve aprovação independente registrada e o número de aprovações obrigatórias foi configurado como zero; a regra continua exigindo PR. A [demonstração funcional de 3min44s](https://github.com/dantasz15/bibliolivre/releases/download/v1.0.0/BiblioLivre_Demonstracao_Final.mp4) foi publicada como asset da release. O vídeo usa motion graphics e narração, mostrando comandos e saídas executados em banco temporário com dados fictícios; não é captura contínua de tela. Consulte [`docs/GOVERNANCA.md`](docs/GOVERNANCA.md) para o estado detalhado.
 
 ## Sumário
 - [Instalação e execução](#instalação-e-execução)

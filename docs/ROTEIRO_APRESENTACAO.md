@@ -1,24 +1,26 @@
-# Roteiro da Demonstração Funcional — 3 a 5 minutos
+# Roteiro da Demonstração Funcional — Entrega Final
 
-**Status:** roteiro preparado para a Entrega Final publicada. A gravação e o envio para YouTube, Drive, Loom ou SharePoint ainda precisam ser feitos pelo estudante. Este arquivo não representa um vídeo gravado nem contém link fictício.
+**Status:** demonstração final publicada como asset da release pública [`v1.0.0`](https://github.com/dantasz15/bibliolivre/releases/tag/v1.0.0). O vídeo tem 3min44s, resolução 1080p e narração em português brasileiro. A composição usa motion graphics; as telas de terminal exibem comandos e resultados executados na CLI real, em banco SQLite temporário e com dados fictícios. Não se trata de captura contínua da tela.
 
-| Tempo | O que narrar | O que mostrar |
-|---|---|---|
-| 0:00–0:30 | Apresentar o problema: bibliotecas comunitárias controlam empréstimos manualmente e precisam de uma ferramenta local, sem servidor. | README e objetivo do BiblioLivre. |
-| 0:30–1:00 | Explicar a arquitetura: CLI, serviços, repositório SQLite e especificação com requisitos rastreáveis. | `docs/SPEC.md` seção As-Built e diagrama do README. |
-| 1:00–2:10 | Executar o fluxo: cadastrar livro e membro, emprestar, verificar disponibilidade, renovar e devolver. | Terminal com `make demo` ou comandos do README. Usar apenas dados fictícios. |
-| 2:10–2:45 | Mostrar regras de negócio e privacidade, incluindo anonimização do membro e histórico preservado. | `docs/SPEC.md`, comando `membro-anonimizar` e teste da colisão do e-mail sentinela. |
-| 2:45–3:35 | Executar a suíte e explicar o que a evidência mede. | `make coverage`; mostrar total de testes e relatório de cobertura. Esclarecer que cobertura não prova ausência de bugs. |
-| 3:35–4:15 | Apresentar a release oficial `v1.0.0`, integrada em `main` e validada por CI/CodeQL. Explicar que o trabalho é individual: houve revisão pelo autor, mas não aprovação independente; a exigência de aprovações foi configurada como zero, mantendo-se a exigência de PR. | PR #9, branch `main`, tag/release `v1.0.0` e status das execuções no GitHub Actions. |
-| 4:15–4:30 | Resumir um aprendizado: a auditoria detectou uma colisão de unicidade não coberta; foi corrigida e ganhou teste de regressão. | Teste `test_colisao_de_email_sentinela_nao_impede_anonimizacao`. |
+**[Assistir/baixar a demonstração funcional](https://github.com/dantasz15/bibliolivre/releases/download/v1.0.0/BiblioLivre_Demonstracao_Final.mp4)**
 
-## Antes de gravar
+| Tempo | Conteúdo narrado e mostrado |
+|---|---|
+| 0:00–0:15 | Apresentação do BiblioLivre e seu objetivo para bibliotecas comunitárias. |
+| 0:15–0:24 | Identificação acadêmica do projeto intermediário — Entrega Final de Bootcamp III. |
+| 0:24–0:53 | Arquitetura em camadas, especificação, testes, opções Python/Docker e uso de dados fictícios. |
+| 0:53–1:35 | Cadastro de livro e pessoa leitora; empréstimo, disponibilidade, renovação, consulta de atrasos, devolução e multa. |
+| 1:35–2:04 | Anonimização, ressalva sobre LGPD e correção de colisão do e-mail sentinela com teste de regressão. |
+| 2:04–2:35 | 47 testes em Python 3.10, 3.11 e 3.12, 100% de cobertura em 348 instruções, Ruff, Docker, CI e CodeQL; limites da métrica. |
+| 2:35–3:05 | Release oficial, integração dos PRs e transparência sobre a revisão individual. |
+| 3:05–3:28 | Escopo e limitações de implantação e uso do SQLite local. |
+| 3:28–3:44 | Encerramento com os links do repositório e da release. |
 
-1. Atualizar o código local com a release revisada.
-2. Criar um banco de demonstração descartável e usar somente nomes/e-mails fictícios.
-3. Confirmar que a pipeline e o link de release exibidos correspondem à versão entregue.
-4. Gravar entre 3 e 5 minutos, sem expor RA em terminal, segredos, dados pessoais reais ou abas privadas.
-5. Publicar o vídeo e inserir o link verificável no PDF de submissão final.
+## Proteção de dados e interpretação
+
+A execução usa um arquivo `demo.sqlite3` temporário, a pessoa fictícia “Lia Martins” e um endereço reservado ao uso de testes (`example.test`). O vídeo não exibe o RA. Os resultados correspondem a comandos reais da aplicação, embora o layout seja uma composição gráfica, e não uma gravação contínua da interface. A anonimização demonstrada é uma funcionalidade; não constitui certificação de conformidade integral com a LGPD.
+
+A demonstração registra o fluxo funcional e os principais resultados de homologação. A cobertura de 100% é a proporção de linhas exercitadas pela suíte, não uma prova de ausência de defeitos. CI e CodeQL não equivalem a revisão por pares. Por se tratar de trabalho individual, o próprio autor revisou a entrega, sem aprovação independente registrada.
 
 ## Perguntas prováveis
 
